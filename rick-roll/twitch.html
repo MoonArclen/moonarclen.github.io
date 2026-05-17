@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Loading...</title>
+  <link rel="icon" type="image/png" href="https://cdn-icons-png.flaticon.com/32/2111/2111668.png" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background: #000;
+    }
+
+    #twitch-player,
+    #youtube-player {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .twitch-icon {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      opacity: 0.7;
+      pointer-events: none;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <div id="twitch-player"></div>
+
+  <img
+    src="https://www.citypng.com/public/uploads/preview/hd-twitch-official-logo-transparent-background-png-11635958347q5q7zq4z4z.png"
+    alt="Twitch"
+    class="twitch-icon"
+  />
+
+  <script src="https://player.twitch.tv/js/embed/v1.js"></script>
+  <script>
+    let twitchChannel = "moonarclen";
+    const youtubeVideoId = "dQw4w9WgXcQ";
+    const timeOnTwitch = 20000;
+    const timeOnYouTube = 25000;
+
+    function updateTitle() {
+      document.title = `${twitchChannel} - Twitch`;
+    }
+
+    updateTitle();
+    setInterval(updateTitle, 100);
+
+    function getRedirectUrl() {
+      return `https://www.twitch.tv/${twitchChannel}`;
+    }
+
+    let twitchEmbed = new Twitch.Player("twitch-player", {
+      width: "100%",
+      height: "100%",
+      channel: twitchChannel,
+      layout: "video",
+      autoplay: true,
+      muted: false,
+      parent: [window.location.hostname],
+    });
+
+    function reloadTwitchPlayer() {
+      document.getElementById("twitch-player").innerHTML = "";
+
+      twitchEmbed = new Twitch.Player("twitch-player", {
+        width: "100%",
+        height: "100%",
+        channel: twitchChannel,
+        layout: "video",
+        autoplay: true,
+        muted: false,
+        parent: [window.location.hostname],
+      });
+    }
+
+    let lastChannel = twitchChannel;
+
+    setInterval(() => {
+      if (twitchChannel !== lastChannel) {
+        lastChannel = twitchChannel;
+        reloadTwitchPlayer();
+      }
+    }, 200);
+
+    setTimeout(() => {
+      document.getElementById("twitch-player").style.display = "none";
+
+      const ytIframe = document.createElement("iframe");
+      ytIframe.id = "youtube-player";
+      ytIframe.src = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&mute=0&controls=0&modestbranding=1&rel=0&iv_load_policy=3&playsinline=1`;
+      ytIframe.setAttribute("frameborder", "0");
+      ytIframe.setAttribute(
+        "allow",
+        "accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+      );
+      ytIframe.setAttribute("allowfullscreen", "");
+
+      document.body.appendChild(ytIframe);
+
+      setTimeout(() => {
+        window.location.href = getRedirectUrl();
+      }, timeOnYouTube);
+    }, timeOnTwitch);
+  </script>
+</body>
+    </html>
