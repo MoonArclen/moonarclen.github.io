@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Moon Arclen • Portfolio | ma.work.gd</title>
+<meta name="description" content="Moon — founder of Arclen Corporation, developer, creator.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:Inter,sans-serif;
+  background:#030712;
+  color:#fff;
+  overflow-x:hidden;
+}
+canvas{position:fixed;inset:0;z-index:-2}
+.bg{
+  position:fixed;inset:0;z-index:-1;
+  background:
+    radial-gradient(circle at 20% 20%,rgba(59,130,246,.16),transparent 35%),
+    radial-gradient(circle at 80% 30%,rgba(139,92,246,.18),transparent 35%),
+    radial-gradient(circle at 50% 85%,rgba(14,165,233,.10),transparent 35%),
+    linear-gradient(180deg,#020617,#000);
+}
+.container{max-width:1150px;margin:auto;padding:30px 20px 70px}
+.hero{text-align:center;padding:70px 0 40px}
+.avatar{
+  width:130px;height:130px;border-radius:50%;
+  border:3px solid rgba(255,255,255,.12);
+  box-shadow:0 0 35px rgba(59,130,246,.35);
+  object-fit:cover;
+}
+.hero h1{
+  margin-top:18px;font-size:3.4rem;font-weight:900;
+  background:linear-gradient(90deg,#93c5fd,#c4b5fd,#67e8f9);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero p{margin-top:10px;color:#cbd5e1;font-size:1.05rem}
+
+.section{
+  margin-top:28px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:22px;
+  padding:28px;
+  backdrop-filter:blur(14px);
+}
+.section h2{font-size:1.55rem;margin-bottom:16px}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:18px;
+  margin-top:10px;
+}
+
+.project-link{text-decoration:none;color:inherit;display:block}
+
+.card{
+  position:relative;
+  background:rgba(255,255,255,.04);
+  border-radius:18px;
+  padding:22px;
+  overflow:hidden;
+  transition:.35s ease;
+  border:1px solid rgba(255,255,255,.08);
+}
+.card::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:18px;
+  background:linear-gradient(120deg,transparent,rgba(96,165,250,.45),transparent);
+  transform:translateX(-130%);
+  transition:.7s;
+}
+.card:hover::before{transform:translateX(130%)}
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 0 18px rgba(59,130,246,.35),0 0 40px rgba(59,130,246,.18);
+  border-color:rgba(96,165,250,.35);
+  background:rgba(30,41,59,.7);
+}
+.card h3{color:#93c5fd;margin-bottom:8px}
+.card p{color:#d1d5db;line-height:1.5}
+
+.links,.filter-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+.btn{
+  text-decoration:none;
+  color:#fff;
+  text-align:center;
+  padding:14px 18px;
+  border-radius:14px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  transition:.25s;
+  cursor:pointer;
+}
+.btn:hover,.btn.active{
+  transform:translateY(-3px);
+  background:rgba(59,130,246,.22);
+  border-color:rgba(96,165,250,.35);
+}
+
+.org{
+  font-family:monospace;
+  white-space:pre;
+  background:rgba(0,0,0,.28);
+  padding:22px;
+  border-radius:16px;
+  color:#67e8f9;
+  line-height:1.7;
+  overflow:auto;
+}
+
+.skills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:10px;
+}
+.tag{
+  background:rgba(59,130,246,.15);
+  border:1px solid rgba(59,130,246,.25);
+  padding:8px 14px;
+  border-radius:999px;
+  font-size:.95rem;
+}
+
+footer{text-align:center;margin-top:40px;color:#94a3b8}
+
+@media(max-width:650px){
+  .hero h1{font-size:2.3rem}
+  .org{font-size:.82rem}
+}
+</style>
+</head>
+<body>
+
+<div class="bg"></div>
+<canvas id="stars"></canvas>
+
+<div class="container">
+
+<section class="hero">
+  <img class="avatar" src="https://avatars.githubusercontent.com/u/9919?s=200&v=4">
+  <h1>Moon</h1>
+  <p>Developer • Founder • Building the Arclen Network</p>
+</section>
+
+<section class="section">
+  <h2>About</h2>
+  <p style="line-height:1.7;color:#d1d5db">
+    I create websites, digital systems, community projects, and online experiences. I run ma.work.gd and build projects under Arclen Corporation.
+  </p>
+
+  <div class="skills">
+    <span class="tag">HTML</span>
+    <span class="tag">CSS</span>
+    <span class="tag">JavaScript</span>
+    <span class="tag">Python</span>
+    <span class="tag">Luau</span>
+    <span class="tag">GitHub Pages</span>
+    <span class="tag">Community Management</span>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Experience</h2>
+
+  <div class="filter-buttons">
+    <button class="btn active" onclick="showExp('web',this)">Web</button>
+    <button class="btn" onclick="showExp('dev',this)">Dev</button>
+    <button class="btn" onclick="showExp('mod',this)">Mod</button>
+  </div>
+
+  <div id="experience-grid" class="grid" style="margin-top:20px;"></div>
+</section>
+
+<section class="section">
+  <h2>Organization Map</h2>
+  <div class="org">
+Arclen Corporation
+│
+├── Astra Corporation
+│   ├── Veyra
+│   └── Marai
+│
+└── Music & Art
+    └── Game Studio
+        └── Tokyo, Japan
+  </div>
+</section>
+
+<section class="section">
+  <h2>Projects</h2>
+  <div class="grid">
+
+    <a class="project-link" href="https://ma.work.gd">
+      <div class="card"><h3>ma.work.gd</h3><p>Personal portfolio and hub.</p></div>
+    </a>
+
+    <a class="project-link" href="/arclen">
+      <div class="card"><h3>Arclen Corporation</h3><p>Main organization for products and systems.</p></div>
+    </a>
+
+    <a class="project-link" href="/astra">
+      <div class="card"><h3>Astra Corporation</h3><p>Digital technology company.</p></div>
+    </a>
+
+    <a class="project-link" href="/music-art">
+      <div class="card"><h3>Music & Art</h3><p>Tokyo-based game development studio.</p></div>
+    </a>
+
+  </div>
+</section>
+
+<section class="section">
+  <h2>Connect</h2>
+  <div class="links">
+    <a class="btn" href="#">Discord</a>
+    <a class="btn" href="#">YouTube</a>
+    <a class="btn" href="#">Twitch</a>
+    <a class="btn" href="#">GitHub</a>
+  </div>
+</section>
+
+<footer>
+© 2026 Moon • Arclen Network
+</footer>
+
+</div>
+
+<script>
+const c=document.getElementById("stars");
+const ctx=c.getContext("2d");
+let stars=[];
+
+function resize(){
+  c.width=innerWidth;
+  c.height=innerHeight;
+}
+resize();
+addEventListener("resize",resize);
+
+for(let i=0;i<220;i++){
+  stars.push({
+    x:Math.random()*innerWidth,
+    y:Math.random()*innerHeight,
+    r:Math.random()*2,
+    s:Math.random()*0.35+.08
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,c.width,c.height);
+  ctx.fillStyle="white";
+  stars.forEach(st=>{
+    ctx.beginPath();
+    ctx.arc(st.x,st.y,st.r,0,Math.PI*2);
+    ctx.fill();
+    st.y+=st.s;
+    if(st.y>innerHeight){
+      st.y=0;
+      st.x=Math.random()*innerWidth;
+    }
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+
+const experience = {
+  web: [
+    ["Portfolio Sites","Built custom sites using HTML/CSS/JS."],
+    ["Domain Setup","Configured custom domains and hosting."],
+    ["GitHub Pages","Managed deployments and static hosting."]
+  ],
+  dev: [
+    ["Frontend","JavaScript interfaces and web apps."],
+    ["Learning Python","Building tools and automation."],
+    ["Learning Luau","Roblox development projects."]
+  ],
+  mod: [
+    ["Rainda Channel","Moderator work and support."],
+    ["SmallCIsCool Server","Community moderation."],
+    ["Discord Management","Rules, support, setup."]
+  ]
+};
+
+function showExp(type, btn){
+  document.querySelectorAll('.filter-buttons .btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const grid = document.getElementById('experience-grid');
+  grid.innerHTML = '';
+
+  experience[type].forEach(item=>{
+    grid.innerHTML += `
+      <div class="card">
+        <h3>${item[0]}</h3>
+        <p>${item[1]}</p>
+      </div>
+    `;
+  });
+}
+
+showExp('web', document.querySelector('.filter-buttons .btn'));
+</script>
+
+</body>
+</html>
