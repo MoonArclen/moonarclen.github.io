@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Moon Arclen | ma.work.gd </title>
+<title>Moon Arclen | ma.work.gd</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/a2e0e6ad65.js" crossorigin="anonymous"></script>
@@ -13,15 +13,12 @@
 html{scroll-behavior:smooth}
 body{
 color:#fff;
-line-height:1.5;
 background:
 radial-gradient(circle at 15% 20%, rgba(88,28,135,.35), transparent 25%),
 radial-gradient(circle at 85% 30%, rgba(37,99,235,.25), transparent 20%),
 radial-gradient(circle at 50% 80%, rgba(14,165,233,.18), transparent 20%),
-radial-gradient(circle at 20% 70%, rgba(255,255,255,.08) 1px, transparent 1px),
-radial-gradient(circle at 80% 15%, rgba(255,255,255,.06) 1px, transparent 1px),
 #040612;
-background-size:100% 100%,100% 100%,100% 100%,140px 140px,180px 180px;
+background-size:100% 100%;
 overflow-x:hidden;
 }
 
@@ -55,7 +52,6 @@ text-shadow:0 0 25px rgba(96,165,250,.45);
 header p{
 margin-top:10px;
 color:#cbd5e1;
-font-size:1rem;
 }
 
 section{
@@ -83,7 +79,7 @@ gap:16px;
 overflow-x:auto;
 padding-bottom:10px;
 }
-.video-card{
+.item{
 min-width:340px;
 max-width:340px;
 background:rgba(51,65,85,.75);
@@ -96,15 +92,21 @@ width:100%;
 border:none;
 border-radius:10px;
 }
-
-.project{
-background:#334155;
-padding:12px;
+img{
+width:100%;
 border-radius:10px;
-margin-bottom:10px;
+display:block;
 }
 
-.socials{text-align:center}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:16px;
+}
+
+.socials{
+text-align:center;
+}
 .socials a{
 color:white;
 font-size:1.6rem;
@@ -140,71 +142,13 @@ padding:30px;
 margin-top:30px;
 border-top:1px solid rgba(255,255,255,.06);
 }
-
-#overlay404{
-position:fixed;
-inset:0;
-display:none;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:20px;
-background:#030712;
-z-index:99999;
-}
-#overlay404::before{
-content:"";
-position:absolute;
-inset:0;
-background-image:
-radial-gradient(white 1px, transparent 1px),
-radial-gradient(white 1px, transparent 1px);
-background-size:120px 120px,180px 180px;
-opacity:.18;
-}
-.err-box{
-position:relative;
-z-index:2;
-max-width:700px;
-padding:40px;
-background:rgba(15,23,42,.75);
-border:1px solid rgba(255,255,255,.08);
-border-radius:22px;
-backdrop-filter:blur(10px);
-}
-.err-box h1{
-font-size:7rem;
-font-weight:900;
-text-shadow:0 0 20px rgba(96,165,250,.45);
-}
-.err-box h2{
-font-size:2rem;
-margin-bottom:12px;
-}
-.err-box p{
-color:#cbd5e1;
-margin-bottom:20px;
-}
-.err-box a{
-display:inline-block;
-padding:14px 26px;
-background:#2563eb;
-color:white;
-text-decoration:none;
-border-radius:10px;
-font-weight:700;
-}
-.small{
-margin-top:18px;
-font-size:.9rem;
-color:#94a3b8;
-}
 </style>
 </head>
 <body>
 
 <nav>
-<a href="/">Home</a>
+<a href="#intro">Intro</a>
+<a href="#bio">Bio</a>
 <a href="#projects">Projects</a>
 <a href="#contact">Contact</a>
 </nav>
@@ -214,36 +158,83 @@ color:#94a3b8;
 <p>Creator • Developer • Community • Projects</p>
 </header>
 
-<section>
-<h2>About</h2>
+<section id="intro">
+<h2>Intro</h2>
 <div class="card">
-Welcome to my official galaxy hub. Explore my uploads, streams, projects and updates.
+Welcome to my official galaxy hub — explore videos, projects, collaborations and updates.
+</div>
+</section>
+
+<section id="bio">
+<h2>Bio</h2>
+<div class="card">
+I’m Moon Arclen — web developer, creator, moderator, and community builder. I work on websites, Discord projects, and content.
+</div>
+</section>
+
+<section>
+<h2>Collaborations</h2>
+<div class="grid">
+<img src="images/collab1.jpg">
+<img src="images/collab2.jpg">
+<img src="images/collab3.jpg">
+<img src="images/collab4.jpg">
+<img src="images/collab5.jpg">
+<img src="images/collab6.jpg">
 </div>
 </section>
 
 <section>
 <h2>YouTube Videos</h2>
 <div class="scroll-row">
-<div class="video-card"><iframe height="200" src="https://www.youtube.com/embed/DoO6seIHN0" allowfullscreen></iframe></div>
+<div class="item"><iframe height="200" src="https://www.youtube.com/embed/DoO6seIHN0" allowfullscreen></iframe></div>
+<div class="item"><iframe height="200" src="https://www.youtube.com/embed/VIDEO2" allowfullscreen></iframe></div>
+<div class="item"><iframe height="200" src="https://www.youtube.com/embed/VIDEO3" allowfullscreen></iframe></div>
 </div>
 </section>
 
 <section>
-<h2>Twitch Live</h2>
-<div class="card">
-<iframe>https://ma.work.gd/embed/twitch.html</iframe>
+<h2>YouTube Shorts</h2>
+<div class="scroll-row">
+<div class="item"><iframe height="420" src="https://www.youtube.com/embed/SHORT1"></iframe></div>
+<div class="item"><iframe height="420" src="https://www.youtube.com/embed/SHORT2"></iframe></div>
+<div class="item"><iframe height="420" src="https://www.youtube.com/embed/SHORT3"></iframe></div>
+</div>
+</section>
+
+<section>
+<h2>YouTube Playlists</h2>
+<div class="grid">
+<img src="images/playlist1.jpg">
+<img src="images/playlist2.jpg">
+<img src="images/playlist3.jpg">
+<img src="images/playlist4.jpg">
+<img src="images/playlist5.jpg">
+<img src="images/playlist6.jpg">
+</div>
+</section>
+
 <section id="projects">
 <h2>Projects</h2>
 <div class="card">
-<div class="project">Website development</div>
-<div class="project">Discord projects</div>
-<div class="project">Future apps</div>
+• Website development<br>
+• Discord bot development<br>
+• Hosting systems<br>
+• Future apps
 </div>
 </section>
 
 <section>
-<h2>Social Media</h2>
+<h2>News</h2>
 <div class="card">
+Latest updates and announcements will appear here.
+</div>
+</section>
+
+<section>
+<h2>Contact Details</h2>
+<div class="card">
+Email: hello@ma.work.gd<br><br>
 <div class="socials">
 <a href="https://youtube.com/@moonarclen"><i class="fab fa-youtube"></i></a>
 <a href="https://twitch.tv/moonarclen"><i class="fab fa-twitch"></i></a>
@@ -251,12 +242,11 @@ Welcome to my official galaxy hub. Explore my uploads, streams, projects and upd
 <a href="https://instagram.com/moonarclen"><i class="fab fa-instagram"></i></a>
 <a href="https://x.com/moonarclen"><i class="fab fa-x-twitter"></i></a>
 </div>
-<p style="text-align:center;margin-top:18px;color:#cbd5e1;">hello@ma.work.gd</p>
 </div>
 </section>
 
 <section id="contact">
-<h2>Contact</h2>
+<h2>Contact Form</h2>
 <div class="card">
 <form action="https://formsubmit.co/hello@ma.work.gd" method="POST">
 <input type="hidden" name="_captcha" value="false">
@@ -271,25 +261,6 @@ Welcome to my official galaxy hub. Explore my uploads, streams, projects and upd
 <footer>
 <p>© 2026 Moon Arclen • ma.work.gd</p>
 </footer>
-
-<div id="overlay404">
-<div class="err-box">
-<h1>404</h1>
-<h2>Lost in the Galaxy</h2>
-<p>The page you're looking for drifted into deep space or was never created.</p>
-<a href="/">Return Home</a>
-<div class="small">Moon Arclen • ma.work.gd</div>
-</div>
-</div>
-
-<script>
-const validPaths = ["/","/index.html"];
-const path = location.pathname.toLowerCase();
-
-if(!validPaths.includes(path)){
-document.getElementById("overlay404").style.display="flex";
-}
-</script>
 
 </body>
 </html>
