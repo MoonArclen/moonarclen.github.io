@@ -5,13 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Moon Arclen | ma.work.gd</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/a2e0e6ad65.js" crossorigin="anonymous"></script>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
 html{scroll-behavior:smooth}
-
 body{
 color:#fff;
 line-height:1.5;
@@ -21,9 +20,9 @@ radial-gradient(circle at 85% 30%, rgba(37,99,235,.25), transparent 20%),
 radial-gradient(circle at 50% 80%, rgba(14,165,233,.18), transparent 20%),
 radial-gradient(circle at 20% 70%, rgba(255,255,255,.08) 1px, transparent 1px),
 radial-gradient(circle at 80% 15%, rgba(255,255,255,.06) 1px, transparent 1px),
-radial-gradient(circle at 60% 45%, rgba(255,255,255,.04) 1px, transparent 1px),
 #040612;
-background-size:100% 100%,100% 100%,100% 100%,140px 140px,180px 180px,220px 220px;
+background-size:100% 100%,100% 100%,100% 100%,140px 140px,180px 180px;
+overflow-x:hidden;
 }
 
 nav{
@@ -45,14 +44,13 @@ font-weight:600;
 }
 
 header{
-padding:85px 20px;
+padding:90px 20px;
 text-align:center;
-background:linear-gradient(180deg,rgba(15,23,42,.8),rgba(30,27,75,.7));
-border-bottom:1px solid rgba(255,255,255,.08);
 }
 header h1{
-font-size:3.3rem;
-text-shadow:0 0 20px rgba(96,165,250,.4);
+font-size:3.6rem;
+font-weight:900;
+text-shadow:0 0 25px rgba(96,165,250,.45);
 }
 header p{
 margin-top:10px;
@@ -61,7 +59,7 @@ font-size:1rem;
 }
 
 section{
-max-width:1120px;
+max-width:1100px;
 margin:auto;
 padding:45px 18px;
 }
@@ -72,12 +70,11 @@ margin-bottom:18px;
 
 .card{
 background:rgba(30,41,59,.75);
-backdrop-filter:blur(8px);
+backdrop-filter:blur(10px);
 border:1px solid rgba(255,255,255,.06);
 padding:20px;
 border-radius:16px;
 margin-bottom:18px;
-box-shadow:0 0 30px rgba(37,99,235,.08);
 }
 
 .scroll-row{
@@ -85,14 +82,7 @@ display:flex;
 gap:16px;
 overflow-x:auto;
 padding-bottom:10px;
-scrollbar-width:auto;
 }
-.scroll-row::-webkit-scrollbar{height:8px}
-.scroll-row::-webkit-scrollbar-thumb{
-background:#475569;
-border-radius:10px;
-}
-
 .video-card{
 min-width:340px;
 max-width:340px;
@@ -100,9 +90,7 @@ background:rgba(51,65,85,.75);
 padding:10px;
 border-radius:14px;
 flex-shrink:0;
-border:1px solid rgba(255,255,255,.05);
 }
-
 iframe{
 width:100%;
 border:none;
@@ -116,10 +104,7 @@ border-radius:10px;
 margin-bottom:10px;
 }
 
-.socials{
-text-align:center;
-margin-top:10px;
-}
+.socials{text-align:center}
 .socials a{
 color:white;
 font-size:1.6rem;
@@ -155,9 +140,64 @@ padding:30px;
 margin-top:30px;
 border-top:1px solid rgba(255,255,255,.06);
 }
-footer p{
-color:#94a3b8;
+
+#overlay404{
+position:fixed;
+inset:0;
+display:none;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+background:#030712;
+z-index:99999;
+}
+#overlay404::before{
+content:"";
+position:absolute;
+inset:0;
+background-image:
+radial-gradient(white 1px, transparent 1px),
+radial-gradient(white 1px, transparent 1px);
+background-size:120px 120px,180px 180px;
+opacity:.18;
+}
+.err-box{
+position:relative;
+z-index:2;
+max-width:700px;
+padding:40px;
+background:rgba(15,23,42,.75);
+border:1px solid rgba(255,255,255,.08);
+border-radius:22px;
+backdrop-filter:blur(10px);
+}
+.err-box h1{
+font-size:7rem;
+font-weight:900;
+text-shadow:0 0 20px rgba(96,165,250,.45);
+}
+.err-box h2{
+font-size:2rem;
 margin-bottom:12px;
+}
+.err-box p{
+color:#cbd5e1;
+margin-bottom:20px;
+}
+.err-box a{
+display:inline-block;
+padding:14px 26px;
+background:#2563eb;
+color:white;
+text-decoration:none;
+border-radius:10px;
+font-weight:700;
+}
+.small{
+margin-top:18px;
+font-size:.9rem;
+color:#94a3b8;
 }
 </style>
 </head>
@@ -165,10 +205,8 @@ margin-bottom:12px;
 
 <nav>
 <a href="/">Home</a>
-<a href="/portfolio">Portfolio</a>
-<a href="/jobs">Jobs</a>
-<a href="/projects">Projects</a>
-<a href="/contact">Contact</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact</a>
 </nav>
 
 <header>
@@ -179,65 +217,30 @@ margin-bottom:12px;
 <section>
 <h2>About</h2>
 <div class="card">
-Welcome to my official galaxy hub. Explore my uploads, streams, projects, updates and contact information.
+Welcome to my official galaxy hub. Explore my uploads, streams, projects and updates.
 </div>
 </section>
 
 <section>
 <h2>YouTube Videos</h2>
 <div class="scroll-row">
-<div class="video-card"><iframe height="200" src="https://www.youtube.com/embed/VID101"></iframe></div>
-<div class="video-card"><iframe height="200" src="https://www.youtube.com/embed/DoO6seIHN0"></iframe></div>
-<div class="video-card"><iframe height="200" src="https://www.youtube.com/embed/VID103"></iframe></div>
-<div class="video-card"><iframe height="200" src="https://www.youtube.com/embed/VID104"></iframe></div>
-<div class="video-card"><iframe height="200" src="https://www.youtube.com/embed/VID105"></iframe></div>
-<div class="video-card"><iframe height="200" src="https://www.youtube.com/embed/VID106"></iframe></div>
-</div>
-</section>
-
-<section>
-<h2>YouTube Shorts</h2>
-<div class="scroll-row">
-<div class="video-card"><iframe height="420" src="https://www.youtube.com/embed/VID201"></iframe></div>
-<div class="video-card"><iframe height="420" src="https://www.youtube.com/embed/VID202"></iframe></div>
-<div class="video-card"><iframe height="420" src="https://www.youtube.com/embed/VID203"></iframe></div>
-<div class="video-card"><iframe height="420" src="https://www.youtube.com/embed/VID204"></iframe></div>
-<div class="video-card"><iframe height="420" src="https://www.youtube.com/embed/VID205"></iframe></div>
-<div class="video-card"><iframe height="420" src="https://www.youtube.com/embed/VID206"></iframe></div>
-</div>
-</section>
-
-<section>
-<h2>YouTube Playlists</h2>
-<div class="scroll-row">
-<div class="video-card"><iframe height="200" src="https://www.youtube.com/embed/videoseries?list=VID301"></iframe></div>
-<div class="video-card"><iframe height="200" src="https://www.youtube.com/embed/videoseries?list=VID302"></iframe></div>
-<div class="video-card"><iframe height="200" src="https://www.youtube.com/embed/videoseries?list=VID303"></iframe></div>
-<div class="video-card"><iframe height="200" src="https://www.youtube.com/embed/videoseries?list=VID304"></iframe></div>
-<div class="video-card"><iframe height="200" src="https://www.youtube.com/embed/videoseries?list=VID305"></iframe></div>
-<div class="video-card"><iframe height="200" src="https://www.youtube.com/embed/videoseries?list=VID306"></iframe></div>
+<div class="video-card"><iframe height="200" src="https://www.youtube.com/embed/DoO6seIHN0" allowfullscreen></iframe></div>
 </div>
 </section>
 
 <section>
 <h2>Twitch Live</h2>
 <div class="card">
-<iframe height="460" src="https://player.twitch.tv/?channel=moonarclen&parent=ma.work.gd"></iframe>
+<iframe height="460" src="https://player.twitch.tv/?channel=moonarclen&parent=ma.work.gd" allowfullscreen></iframe>
 </div>
 </section>
 
-<section>
-<h2>News</h2>
-<div class="card">
-<div class="project">No news yet — check back soon.</div>
-</div>
-</section>
-
-<section>
+<section id="projects">
 <h2>Projects</h2>
 <div class="card">
-<div class="project">Website — Web development and hosting projects.</div>
-<div class="project">Ada — Discord bot project.</div>
+<div class="project">Website development</div>
+<div class="project">Discord projects</div>
+<div class="project">Future apps</div>
 </div>
 </section>
 
@@ -251,14 +254,11 @@ Welcome to my official galaxy hub. Explore my uploads, streams, projects, update
 <a href="https://instagram.com/moonarclen"><i class="fab fa-instagram"></i></a>
 <a href="https://x.com/moonarclen"><i class="fab fa-x-twitter"></i></a>
 </div>
-
-<p style="text-align:center;margin-top:18px;color:#cbd5e1;">
-Email: hello@ma.work.gd
-</p>
+<p style="text-align:center;margin-top:18px;color:#cbd5e1;">hello@ma.work.gd</p>
 </div>
 </section>
 
-<section>
+<section id="contact">
 <h2>Contact</h2>
 <div class="card">
 <form action="https://formsubmit.co/hello@ma.work.gd" method="POST">
@@ -272,16 +272,27 @@ Email: hello@ma.work.gd
 </section>
 
 <footer>
-<p>© 2026 Moon Arclen. All rights reserved.</p>
-
-<div class="socials">
-<a href="https://youtube.com/@moonarclen"><i class="fab fa-youtube"></i></a>
-<a href="https://twitch.tv/moonarclen"><i class="fab fa-twitch"></i></a>
-<a href="https://github.com/moonarclen"><i class="fab fa-github"></i></a>
-<a href="https://instagram.com/moonarclen"><i class="fab fa-instagram"></i></a>
-<a href="https://x.com/moonarclen"><i class="fab fa-x-twitter"></i></a>
-</div>
+<p>© 2026 Moon Arclen • ma.work.gd</p>
 </footer>
+
+<div id="overlay404">
+<div class="err-box">
+<h1>404</h1>
+<h2>Lost in the Galaxy</h2>
+<p>The page you're looking for drifted into deep space or was never created.</p>
+<a href="/">Return Home</a>
+<div class="small">Moon Arclen • ma.work.gd</div>
+</div>
+</div>
+
+<script>
+const validPaths = ["/","/index.html"];
+const path = location.pathname.toLowerCase();
+
+if(!validPaths.includes(path)){
+document.getElementById("overlay404").style.display="flex";
+}
+</script>
 
 </body>
 </html>
