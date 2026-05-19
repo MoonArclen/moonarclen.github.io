@@ -5,7 +5,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Moon Arclen | ma.work.gd</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
@@ -22,33 +26,44 @@ overflow-x:hidden;
 }
 
 nav{
-position:sticky;top:0;z-index:999;
+position:sticky;
+top:0;
+z-index:999;
 background:rgba(10,15,30,.92);
 backdrop-filter:blur(8px);
-padding:14px;text-align:center;
-border-bottom:1px solid rgba(255,255,255,.08)
+padding:14px;
+text-align:center;
+border-bottom:1px solid rgba(255,255,255,.08);
 }
 nav a{
-color:#fff;text-decoration:none;margin:0 12px;font-weight:600
+color:#fff;
+text-decoration:none;
+margin:0 12px;
+font-weight:600;
 }
 
 header{
-padding:90px 20px;text-align:center
+padding:90px 20px;
+text-align:center;
 }
 header h1{
-font-size:3.6rem;font-weight:900;
-text-shadow:0 0 25px rgba(96,165,250,.45)
+font-size:3.6rem;
+font-weight:900;
+text-shadow:0 0 25px rgba(96,165,250,.45);
 }
-header p{margin-top:10px;color:#cbd5e1}
+header p{
+margin-top:10px;
+color:#cbd5e1;
+}
 
 section{
 max-width:1150px;
 margin:auto;
-padding:45px 18px
+padding:45px 18px;
 }
 h2{
 font-size:1.8rem;
-margin-bottom:18px
+margin-bottom:18px;
 }
 
 .card{
@@ -57,28 +72,30 @@ backdrop-filter:blur(10px);
 border:1px solid rgba(255,255,255,.06);
 padding:20px;
 border-radius:16px;
-margin-bottom:18px
+margin-bottom:18px;
 }
 
 .scroll-row{
 display:flex;
 gap:16px;
 overflow-x:auto;
-padding-bottom:10px
+padding-bottom:10px;
+scrollbar-width:thin;
 }
 .scroll-row::-webkit-scrollbar{height:8px}
 .scroll-row::-webkit-scrollbar-thumb{
-background:#475569;border-radius:10px
+background:#475569;
+border-radius:10px;
 }
 
 .item{
-min-width:340px;
-max-width:340px;
+min-width:320px;
+max-width:320px;
 background:rgba(51,65,85,.75);
 padding:10px;
 border-radius:14px;
 flex-shrink:0;
-border:1px solid rgba(255,255,255,.05)
+border:1px solid rgba(255,255,255,.05);
 }
 
 .viewall{
@@ -96,36 +113,32 @@ iframe,img{
 width:100%;
 border:none;
 border-radius:10px;
-display:block
+display:block;
+content-visibility:auto;
+contain-intrinsic-size:300px;
+}
+
+.thumb{
+position:relative;
+cursor:pointer;
+overflow:hidden;
+}
+.thumb::after{
+content:"▶";
+position:absolute;
+inset:0;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:3rem;
+background:rgba(0,0,0,.35);
 }
 
 .socials{text-align:center}
 .socials a{
 color:white;
 font-size:1.8rem;
-margin:0 12px
-}
-
-form{
-display:flex;
-flex-direction:column;
-gap:12px
-}
-input,textarea{
-padding:12px;
-background:#334155;
-border:none;
-border-radius:10px;
-color:white
-}
-button{
-padding:12px;
-background:#2563eb;
-border:none;
-border-radius:10px;
-color:white;
-font-weight:700;
-cursor:pointer
+margin:0 12px;
 }
 
 footer{
@@ -133,7 +146,7 @@ background:rgba(10,15,30,.9);
 text-align:center;
 padding:30px;
 margin-top:30px;
-border-top:1px solid rgba(255,255,255,.06)
+border-top:1px solid rgba(255,255,255,.06);
 }
 </style>
 </head>
@@ -165,7 +178,7 @@ border-top:1px solid rgba(255,255,255,.06)
 <section id="twitch">
 <h2>Live Stream</h2>
 <div class="card">
-<iframe src="/embed/twitch.html" height="500" loading="lazy" allowfullscreen></iframe>
+<iframe src="/embed/twitch.html" height="500" loading="lazy"></iframe>
 </div>
 </section>
 
@@ -173,12 +186,12 @@ border-top:1px solid rgba(255,255,255,.06)
 <h2>Collaborations</h2>
 <div class="card">
 <div class="scroll-row">
-<div class="item"><img src="images/collab1.jpg"></div>
-<div class="item"><img src="images/collab2.jpg"></div>
-<div class="item"><img src="images/collab3.jpg"></div>
-<div class="item"><img src="images/collab4.jpg"></div>
-<div class="item"><img src="images/collab5.jpg"></div>
-<div class="item"><img src="images/collab6.jpg"></div>
+<div class="item"><img src="images/collab1.jpg" loading="lazy" decoding="async"></div>
+<div class="item"><img src="images/collab2.jpg" loading="lazy" decoding="async"></div>
+<div class="item"><img src="images/collab3.jpg" loading="lazy" decoding="async"></div>
+<div class="item"><img src="images/collab4.jpg" loading="lazy" decoding="async"></div>
+<div class="item"><img src="images/collab5.jpg" loading="lazy" decoding="async"></div>
+<div class="item"><img src="images/collab6.jpg" loading="lazy" decoding="async"></div>
 <a class="item viewall" href="/collaborations">View All →</a>
 </div>
 </div>
@@ -187,12 +200,14 @@ border-top:1px solid rgba(255,255,255,.06)
 <section>
 <h2>YouTube Videos</h2>
 <div class="scroll-row">
-<div class="item"><iframe height="200" src="https://www.youtube.com/embed/DoO6seIHN0"></iframe></div>
-<div class="item"><iframe height="200" src="https://www.youtube.com/embed/VIDEO2"></iframe></div>
-<div class="item"><iframe height="200" src="https://www.youtube.com/embed/VIDEO3"></iframe></div>
-<div class="item"><iframe height="200" src="https://www.youtube.com/embed/VIDEO4"></iframe></div>
-<div class="item"><iframe height="200" src="https://www.youtube.com/embed/VIDEO5"></iframe></div>
-<div class="item"><iframe height="200" src="https://www.youtube.com/embed/VIDEO6"></iframe></div>
+
+<div class="item thumb" data-video="DoO6seIHN0"><img src="https://img.youtube.com/vi/DoO6seIHN0/hqdefault.jpg" loading="lazy"></div>
+<div class="item thumb" data-video="VIDEO2"><img src="https://img.youtube.com/vi/VIDEO2/hqdefault.jpg" loading="lazy"></div>
+<div class="item thumb" data-video="VIDEO3"><img src="https://img.youtube.com/vi/VIDEO3/hqdefault.jpg" loading="lazy"></div>
+<div class="item thumb" data-video="VIDEO4"><img src="https://img.youtube.com/vi/VIDEO4/hqdefault.jpg" loading="lazy"></div>
+<div class="item thumb" data-video="VIDEO5"><img src="https://img.youtube.com/vi/VIDEO5/hqdefault.jpg" loading="lazy"></div>
+<div class="item thumb" data-video="VIDEO6"><img src="https://img.youtube.com/vi/VIDEO6/hqdefault.jpg" loading="lazy"></div>
+
 <a class="item viewall" href="/videos">View All →</a>
 </div>
 </section>
@@ -200,12 +215,14 @@ border-top:1px solid rgba(255,255,255,.06)
 <section>
 <h2>YouTube Shorts</h2>
 <div class="scroll-row">
-<div class="item"><iframe height="420" src="https://www.youtube.com/embed/SHORT1"></iframe></div>
-<div class="item"><iframe height="420" src="https://www.youtube.com/embed/SHORT2"></iframe></div>
-<div class="item"><iframe height="420" src="https://www.youtube.com/embed/SHORT3"></iframe></div>
-<div class="item"><iframe height="420" src="https://www.youtube.com/embed/SHORT4"></iframe></div>
-<div class="item"><iframe height="420" src="https://www.youtube.com/embed/SHORT5"></iframe></div>
-<div class="item"><iframe height="420" src="https://www.youtube.com/embed/SHORT6"></iframe></div>
+
+<div class="item thumb" data-video="SHORT1"><img src="https://img.youtube.com/vi/SHORT1/hqdefault.jpg" loading="lazy"></div>
+<div class="item thumb" data-video="SHORT2"><img src="https://img.youtube.com/vi/SHORT2/hqdefault.jpg" loading="lazy"></div>
+<div class="item thumb" data-video="SHORT3"><img src="https://img.youtube.com/vi/SHORT3/hqdefault.jpg" loading="lazy"></div>
+<div class="item thumb" data-video="SHORT4"><img src="https://img.youtube.com/vi/SHORT4/hqdefault.jpg" loading="lazy"></div>
+<div class="item thumb" data-video="SHORT5"><img src="https://img.youtube.com/vi/SHORT5/hqdefault.jpg" loading="lazy"></div>
+<div class="item thumb" data-video="SHORT6"><img src="https://img.youtube.com/vi/SHORT6/hqdefault.jpg" loading="lazy"></div>
+
 <a class="item viewall" href="/shorts">View All →</a>
 </div>
 </section>
@@ -214,12 +231,12 @@ border-top:1px solid rgba(255,255,255,.06)
 <h2>YouTube Playlists</h2>
 <div class="card">
 <div class="scroll-row">
-<div class="item"><img src="images/playlist1.jpg"></div>
-<div class="item"><img src="images/playlist2.jpg"></div>
-<div class="item"><img src="images/playlist3.jpg"></div>
-<div class="item"><img src="images/playlist4.jpg"></div>
-<div class="item"><img src="images/playlist5.jpg"></div>
-<div class="item"><img src="images/playlist6.jpg"></div>
+<div class="item"><img src="images/playlist1.jpg" loading="lazy"></div>
+<div class="item"><img src="images/playlist2.jpg" loading="lazy"></div>
+<div class="item"><img src="images/playlist3.jpg" loading="lazy"></div>
+<div class="item"><img src="images/playlist4.jpg" loading="lazy"></div>
+<div class="item"><img src="images/playlist5.jpg" loading="lazy"></div>
+<div class="item"><img src="images/playlist6.jpg" loading="lazy"></div>
 <a class="item viewall" href="/playlists">View All →</a>
 </div>
 </div>
@@ -243,7 +260,8 @@ Future apps
 <section>
 <h2>Contact Details</h2>
 <div class="card">
-Email: hello@ma.work.gd<br><br>
+Email: hello@ma.work.gd
+<br><br>
 <div class="socials">
 <a href="https://youtube.com/@moonarclen"><i class="fa-brands fa-youtube"></i></a>
 <a href="https://twitch.tv/moonarclen"><i class="fa-brands fa-twitch"></i></a>
@@ -257,13 +275,22 @@ Email: hello@ma.work.gd<br><br>
 <section id="contact">
 <h2>Contact Form</h2>
 <div class="card">
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfplaceholder/viewform?embedded=true" height="800">Loading…</iframe>
+<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfplaceholder/viewform?embedded=true" height="800" loading="lazy"></iframe>
 </div>
 </section>
 
 <footer>
 <p>© 2026 Moon Arclen • ma.work.gd</p>
 </footer>
+
+<script>
+document.querySelectorAll(".thumb").forEach(el=>{
+el.onclick=()=>{
+const id=el.dataset.video;
+el.innerHTML=`<iframe src="https://www.youtube.com/embed/${id}?autoplay=1" height="200" allowfullscreen></iframe>`;
+};
+});
+</script>
 
 </body>
 </html>
