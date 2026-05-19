@@ -1,1 +1,228 @@
-test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Moon Arclen | News</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background: radial-gradient(circle at top, #11183a, #060814 55%, #000);
+    color:#fff;
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(2px 2px at 20% 30%, white, transparent),
+      radial-gradient(2px 2px at 70% 20%, white, transparent),
+      radial-gradient(1px 1px at 80% 60%, white, transparent),
+      radial-gradient(2px 2px at 35% 80%, white, transparent),
+      radial-gradient(1px 1px at 10% 70%, white, transparent),
+      radial-gradient(2px 2px at 90% 40%, white, transparent);
+    background-size:300px 300px;
+    animation:starsMove 70s linear infinite;
+    opacity:.65;
+    z-index:-1;
+}
+
+@keyframes starsMove{
+    from{transform:translateY(0);}
+    to{transform:translateY(-300px);}
+}
+
+.container{
+    width:min(900px,92%);
+    margin:auto;
+    padding:50px 0;
+}
+
+.author-card{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    background:rgba(255,255,255,0.06);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.12);
+    padding:20px;
+    border-radius:20px;
+    box-shadow:0 0 25px rgba(84,139,255,.15);
+    margin-bottom:35px;
+    transition:.3s;
+    cursor:pointer;
+}
+
+.author-card:hover{
+    transform:translateY(-4px);
+    box-shadow:0 0 40px rgba(111,180,255,.35);
+}
+
+.author-card img{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #89a7ff;
+    box-shadow:0 0 20px rgba(137,167,255,.5);
+}
+
+.author-info h1{
+    font-size:1.9rem;
+    margin-bottom:5px;
+}
+
+.author-info p{
+    color:#8db6ff;
+    font-size:1rem;
+}
+
+.article{
+    background:rgba(255,255,255,0.04);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:22px;
+    padding:35px;
+    line-height:1.8;
+    box-shadow:0 0 30px rgba(0,140,255,.08);
+}
+
+.article h2{
+    font-size:2rem;
+    margin-bottom:18px;
+    color:#d8e7ff;
+}
+
+.article .meta{
+    color:#7ca9ff;
+    font-size:.95rem;
+    margin-bottom:25px;
+}
+
+.article p{
+    margin-bottom:20px;
+    color:#e5ecff;
+    font-size:1.05rem;
+}
+
+.highlight{
+    color:#8db6ff;
+    font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="author-card" onclick="location.href='/news/u/@moonarclen'">
+        <img src="arclen.png" alt="Moon Arclen">
+        <div class="author-info">
+            <h1>Moon Arclen</h1>
+            <p>@moonarclen</p>
+        </div>
+    </div>
+
+    <article class="article">
+        <h2>The Story Behind My Ban From a Community I Once Called Home</h2>
+        <div class="meta">Published by Moon Arclen • Community Report</div>
+
+        <p>
+            I was one of <span class="highlight">Mellow’s earliest followers</span> on both Twitch and YouTube.
+            Back then, the streams were more than content to me — they were a place I genuinely enjoyed being part of.
+        </p>
+
+        <p>
+            One day, my YouTube account was compromised. While the hacker had access, my account was used to spam messages in live chat reading
+            <span class="highlight">#JoinTheBots</span>. Around that same time, several bot accounts began appearing using similar messages.
+        </p>
+
+        <p>
+            Because of what happened, I was banned. After explaining that my account had been hacked, I was later unbanned.
+            I secured my account by enabling two-factor authentication and believed everything had been resolved.
+        </p>
+
+        <p>
+            Months later, another account appeared under the name <span class="highlight">@nxtmellowajc</span>.
+            People claimed it was an alternate account created by Mellow. At some point, someone close to Mellow stated that
+            the account had been created by me.
+        </p>
+
+        <p>
+            I never created that account. Yet the accusation spread. When Mellow returned to Twitch for one of the few streams after moving mostly to YouTube,
+            I joined simply to say hello and ask why I appeared banned.
+        </p>
+
+        <p>
+            Her response in stream was direct: I was told I was not welcome and accused of creating alternate accounts and impersonating her.
+            Moments later, I was banned again.
+        </p>
+
+        <p>
+            Since then, whenever I appear in a stream where someone close to Mellow is present or moderating, I am removed.
+            It feels as though my name alone is enough to trigger action.
+        </p>
+
+        <p>
+            I am sharing this because all I want is a fair review of what happened. I supported that community from the beginning,
+            and despite everything, all I want is to return to what was once my favorite streamer’s community.
+        </p>
+
+        <div style="
+            margin-top:40px;
+            padding-top:25px;
+            border-top:1px solid rgba(255,255,255,0.12);
+            text-align:center;
+        ">
+            <h3 style="
+                font-size:1.35rem;
+                margin-bottom:12px;
+                color:#cfe2ff;
+            ">Contact & Information</h3>
+
+            <p style="
+                color:#dce8ff;
+                margin-bottom:12px;
+                font-size:1rem;
+                line-height:1.7;
+            ">
+                If you have any information, context, statements, or evidence related to this situation,
+                or if you would like to share your perspective regarding these events, please contact me directly.
+                I welcome clarification from anyone involved so the full story can be understood fairly.
+            </p>
+
+            <a href="mailto:hello@ma.work.gd?subject=Regarding%20Moon%20Arclen%20Article" style="
+                display:inline-block;
+                margin-top:8px;
+                padding:12px 22px;
+                border-radius:12px;
+                text-decoration:none;
+                background:rgba(80,140,255,0.15);
+                border:1px solid rgba(120,170,255,0.35);
+                color:#8db6ff;
+                font-weight:bold;
+                box-shadow:0 0 15px rgba(100,160,255,0.18);
+                transition:.3s;
+            " onmouseover="this.style.boxShadow='0 0 25px rgba(120,180,255,.45)'"
+               onmouseout="this.style.boxShadow='0 0 15px rgba(100,160,255,.18)'">
+                hello@ma.work.gd
+            </a>
+        </div>
+
+    </article>
+
+</div>
+
+</body>
+  </html>
