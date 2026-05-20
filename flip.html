@@ -1,0 +1,1146 @@
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;
+
+&lt;title&gt;Flip Me Not&lt;/title&gt;
+
+&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/&gt;
+
+&lt;style&gt;
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,body{
+    width:100%;
+    height:100%;
+    overflow:hidden;
+    background:#050816;
+    font-family:Arial,sans-serif;
+    touch-action:manipulation;
+}
+
+canvas{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    display:block;
+}
+
+.screen{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:50;
+}
+
+.panel{
+    width:min(92vw,430px);
+    background:rgba(10,14,28,.96);
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:30px;
+    padding:28px;
+    box-shadow:0 20px 70px rgba(0,0,0,.5);
+    color:white;
+}
+
+#startScreen{
+    background:
+    radial-gradient(
+        circle at top,
+        #12182d,
+        #050816 72%
+    );
+}
+
+#title{
+    font-size:clamp(3rem,10vw,5rem);
+    line-height:.9;
+    margin-bottom:14px;
+    font-weight:900;
+}
+
+#subtitle{
+    color:#9eabd4;
+    line-height:1.7;
+    margin-bottom:20px;
+}
+
+#menuStats{
+    display:flex;
+    gap:12px;
+    margin-bottom:18px;
+}
+
+.menuStat{
+    flex:1;
+    background:rgba(255,255,255,.05);
+    border-radius:18px;
+    padding:14px;
+    text-align:center;
+}
+
+.menuStat span{
+    display:block;
+    color:#8b97bd;
+    font-size:.82rem;
+}
+
+.menuStat strong{
+    display:block;
+    margin-top:5px;
+    font-size:1.45rem;
+}
+
+.menuBtn{
+    width:100%;
+    padding:16px;
+    margin-top:12px;
+    border:none;
+    border-radius:18px;
+    color:white;
+    font-size:1rem;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.15s;
+}
+
+.menuBtn:hover{
+    transform:translateY(-2px);
+}
+
+.menuBtn:active{
+    transform:scale(.98);
+}
+
+.playBtn{
+    background:#6177dc;
+}
+
+.shopBtn{
+    background:#7f64cf;
+}
+
+.creditBtn{
+    background:#38466e;
+}
+
+#socialWrap{
+    margin-top:24px;
+}
+
+#socials{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+}
+
+#socials a{
+    width:46px;
+    height:46px;
+    border-radius:14px;
+    background:rgba(255,255,255,.05);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    text-decoration:none;
+    transition:.15s;
+}
+
+#socials a:hover{
+    transform:translateY(-2px);
+    background:rgba(255,255,255,.1);
+}
+
+#copyright{
+    text-align:center;
+    margin-top:12px;
+    color:#8f9bc2;
+    font-size:.85rem;
+}
+
+#hud{
+    position:fixed;
+    top:16px;
+    left:16px;
+    z-index:20;
+    color:white;
+}
+
+#logo{
+    font-size:clamp(1.8rem,4vw,2.8rem);
+    font-weight:900;
+}
+
+#distance,#coins{
+    margin-top:5px;
+    color:#aeb9dd;
+}
+
+#pauseBtn{
+    position:fixed;
+    top:16px;
+    right:16px;
+    width:54px;
+    height:54px;
+    border:none;
+    border-radius:16px;
+    background:rgba(12,18,34,.92);
+    color:white;
+    font-size:1rem;
+    cursor:pointer;
+    z-index:20;
+}
+
+#creditsScreen,
+#shopScreen,
+#pauseMenu,
+#gameOver{
+    display:none;
+    background:rgba(0,0,0,.68);
+}
+
+.closeBtn{
+    position:absolute;
+    top:16px;
+    right:16px;
+    width:48px;
+    height:48px;
+    border:none;
+    border-radius:14px;
+    background:rgba(255,255,255,.08);
+    color:white;
+    cursor:pointer;
+}
+
+#creditsContent{
+    max-height:60vh;
+    overflow:auto;
+}
+
+.creditRole{
+    color:#8ea1df;
+    margin-top:20px;
+    font-size:1rem;
+}
+
+.creditName{
+    font-size:1.4rem;
+    margin-top:6px;
+}
+
+#shopGrid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    margin-top:20px;
+}
+
+.shopItem{
+    background:rgba(255,255,255,.05);
+    border-radius:18px;
+    padding:20px;
+    text-align:center;
+}
+
+.shopIcon{
+    width:70px;
+    height:70px;
+    margin:auto;
+    border-radius:18px;
+    background:rgba(255,255,255,.06);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:1.8rem;
+}
+
+.shopName{
+    margin-top:12px;
+    color:#c4cdec;
+}
+
+.finalText{
+    margin-top:10px;
+    color:#b8c3e6;
+}
+
+#shareWrap{
+    margin-top:22px;
+}
+
+#shareTitle{
+    color:#aab5d9;
+    margin-bottom:12px;
+    font-size:.95rem;
+    text-align:center;
+}
+
+#shareButtons{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+}
+
+.shareBtn{
+    width:54px;
+    height:54px;
+    border:none;
+    border-radius:16px;
+    background:rgba(255,255,255,.06);
+    color:white;
+    font-size:1rem;
+    cursor:pointer;
+    transition:.15s;
+}
+
+.shareBtn:hover{
+    transform:translateY(-2px);
+    background:rgba(255,255,255,.12);
+}
+
+.shareBtn:active{
+    transform:scale(.96);
+}
+
+@media(max-width:650px){
+
+    #menuStats{
+        flex-direction:column;
+    }
+
+    #shopGrid{
+        grid-template-columns:1fr;
+    }
+
+    .panel{
+        padding:22px;
+    }
+}
+
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;canvas id="game"&gt;&lt;/canvas&gt;
+
+&lt;div id="hud"&gt;
+
+    &lt;div id="logo"&gt;
+        Flip Me Not
+    &lt;/div&gt;
+
+    &lt;div id="distance"&gt;
+        Distance: 0
+    &lt;/div&gt;
+
+    &lt;div id="coins"&gt;
+        Coins: 0
+    &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;button id="pauseBtn"&gt;
+    &lt;i class="fa-solid fa-pause"&gt;&lt;/i&gt;
+&lt;/button&gt;
+
+&lt;div class="screen" id="startScreen"&gt;
+
+    &lt;div class="panel"&gt;
+
+        &lt;div id="title"&gt;
+            Flip&lt;br&gt;Me Not
+        &lt;/div&gt;
+
+        &lt;div id="subtitle"&gt;
+            Flip gravity.&lt;br&gt;
+            Dodge spikes.&lt;br&gt;
+            Survive forever.
+        &lt;/div&gt;
+
+        &lt;div id="menuStats"&gt;
+
+            &lt;div class="menuStat"&gt;
+                &lt;span&gt;Total Coins&lt;/span&gt;
+                &lt;strong id="menuCoins"&gt;0&lt;/strong&gt;
+            &lt;/div&gt;
+
+            &lt;div class="menuStat"&gt;
+                &lt;span&gt;High Score&lt;/span&gt;
+                &lt;strong id="menuHigh"&gt;0&lt;/strong&gt;
+            &lt;/div&gt;
+
+        &lt;/div&gt;
+
+        &lt;button class="menuBtn playBtn" onclick="startGame()"&gt;
+            Play
+        &lt;/button&gt;
+
+        &lt;button class="menuBtn shopBtn" onclick="openShop()"&gt;
+            Shop
+        &lt;/button&gt;
+
+        &lt;button class="menuBtn creditBtn" onclick="openCredits()"&gt;
+            Credits
+        &lt;/button&gt;
+
+        &lt;div id="socialWrap"&gt;
+
+            &lt;div id="socials"&gt;
+
+                &lt;a href="https://youtube.com" target="_blank"&gt;
+                    &lt;i class="fa-brands fa-youtube"&gt;&lt;/i&gt;
+                &lt;/a&gt;
+
+                &lt;a href="https://discord.com" target="_blank"&gt;
+                    &lt;i class="fa-brands fa-discord"&gt;&lt;/i&gt;
+                &lt;/a&gt;
+
+                &lt;a href="https://twitch.tv" target="_blank"&gt;
+                    &lt;i class="fa-brands fa-twitch"&gt;&lt;/i&gt;
+                &lt;/a&gt;
+
+                &lt;a href="https://github.com" target="_blank"&gt;
+                    &lt;i class="fa-brands fa-github"&gt;&lt;/i&gt;
+                &lt;/a&gt;
+
+            &lt;/div&gt;
+
+            &lt;div id="copyright"&gt;
+                © Music &amp; Art
+            &lt;/div&gt;
+
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="screen" id="creditsScreen"&gt;
+
+    &lt;div class="panel"&gt;
+
+        &lt;button class="closeBtn" onclick="closeCredits()"&gt;
+            ✕
+        &lt;/button&gt;
+
+        &lt;div id="creditsContent"&gt;
+
+            &lt;h1&gt;Credits&lt;/h1&gt;
+
+            &lt;div class="creditRole"&gt;
+                Game Creator
+            &lt;/div&gt;
+
+            &lt;div class="creditName"&gt;
+                Moon Arclen
+            &lt;/div&gt;
+
+            &lt;div class="creditRole"&gt;
+                Gameplay
+            &lt;/div&gt;
+
+            &lt;div class="creditName"&gt;
+                Gravity Flip System
+            &lt;/div&gt;
+
+            &lt;div class="creditRole"&gt;
+                Style
+            &lt;/div&gt;
+
+            &lt;div class="creditName"&gt;
+                Handmade Cosmic Design
+            &lt;/div&gt;
+
+            &lt;div class="creditRole"&gt;
+                Engine
+            &lt;/div&gt;
+
+            &lt;div class="creditName"&gt;
+                HTML CSS JavaScript
+            &lt;/div&gt;
+
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="screen" id="shopScreen"&gt;
+
+    &lt;div class="panel"&gt;
+
+        &lt;button class="closeBtn" onclick="closeShop()"&gt;
+            ✕
+        &lt;/button&gt;
+
+        &lt;h1&gt;Shop&lt;/h1&gt;
+
+        &lt;div id="shopGrid"&gt;
+
+            &lt;div class="shopItem"&gt;
+                &lt;div class="shopIcon"&gt;?&lt;/div&gt;
+                &lt;div class="shopName"&gt;Coming Soon&lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="shopItem"&gt;
+                &lt;div class="shopIcon"&gt;?&lt;/div&gt;
+                &lt;div class="shopName"&gt;Coming Soon&lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="shopItem"&gt;
+                &lt;div class="shopIcon"&gt;?&lt;/div&gt;
+                &lt;div class="shopName"&gt;Coming Soon&lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div class="shopItem"&gt;
+                &lt;div class="shopIcon"&gt;?&lt;/div&gt;
+                &lt;div class="shopName"&gt;Coming Soon&lt;/div&gt;
+            &lt;/div&gt;
+
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="screen" id="pauseMenu"&gt;
+
+    &lt;div class="panel"&gt;
+
+        &lt;h1&gt;Paused&lt;/h1&gt;
+
+        &lt;button class="menuBtn playBtn" onclick="resumeGame()"&gt;
+            Resume
+        &lt;/button&gt;
+
+        &lt;button class="menuBtn creditBtn" onclick="location.reload()"&gt;
+            Quit
+        &lt;/button&gt;
+
+    &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;div class="screen" id="gameOver"&gt;
+
+    &lt;div class="panel"&gt;
+
+        &lt;h1&gt;Game Over&lt;/h1&gt;
+
+        &lt;div class="finalText" id="finalDistance"&gt;
+            Distance: 0
+        &lt;/div&gt;
+
+        &lt;div class="finalText" id="finalCoins"&gt;
+            Coins Earned: 0
+        &lt;/div&gt;
+
+        &lt;div class="finalText" id="finalHigh"&gt;
+            High Score: 0
+        &lt;/div&gt;
+
+        &lt;div class="finalText" id="finalEntered"&gt;
+            You entered with 0 coins
+        &lt;/div&gt;
+
+        &lt;button class="menuBtn playBtn" onclick="restartGame()"&gt;
+            Play Again
+        &lt;/button&gt;
+
+        &lt;button class="menuBtn creditBtn" onclick="location.reload()"&gt;
+            Main Menu
+        &lt;/button&gt;
+
+        &lt;div id="shareWrap"&gt;
+
+            &lt;div id="shareTitle"&gt;
+                Share Score
+            &lt;/div&gt;
+
+            &lt;div id="shareButtons"&gt;
+
+                &lt;button class="shareBtn" onclick="shareTwitter()"&gt;
+                    &lt;i class="fa-brands fa-x-twitter"&gt;&lt;/i&gt;
+                &lt;/button&gt;
+
+                &lt;button class="shareBtn" onclick="shareDiscord()"&gt;
+                    &lt;i class="fa-brands fa-discord"&gt;&lt;/i&gt;
+                &lt;/button&gt;
+
+                &lt;button class="shareBtn" onclick="shareCopy()"&gt;
+                    &lt;i class="fa-solid fa-link"&gt;&lt;/i&gt;
+                &lt;/button&gt;
+
+            &lt;/div&gt;
+
+        &lt;/div&gt;
+
+    &lt;/div&gt;
+
+&lt;/div&gt;
+
+&lt;script&gt;
+
+const canvas = document.getElementById("game");
+const ctx = canvas.getContext("2d");
+
+function resize(){
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+}
+
+resize();
+
+window.addEventListener("resize",resize);
+
+const FLOOR = 34;
+const CEILING = 34;
+
+let gravity = .85;
+let gravityDirection = 1;
+
+let gameRunning = false;
+let paused = false;
+
+let score = 0;
+let coins = 0;
+let speed = 7;
+
+let spikeLoop;
+let lastTap = 0;
+
+let totalCoins =
+parseInt(
+localStorage.getItem("flipCoins") || 0
+);
+
+let highScore =
+parseInt(
+localStorage.getItem("flipHigh") || 0
+);
+
+const playerID =
+localStorage.getItem("flipPlayerID")
+||
+(
+"Player#" +
+Math.floor(
+1000 + Math.random() * 9000
+)
+);
+
+localStorage.setItem(
+"flipPlayerID",
+playerID
+);
+
+document.getElementById("menuCoins").innerText = totalCoins;
+document.getElementById("menuHigh").innerText = highScore;
+
+const player = {
+
+    x:160,
+    y:250,
+
+    size:
+    Math.min(
+        innerWidth * .09,
+        56
+    ),
+
+    velY:0,
+    rotation:0
+};
+
+let spikes = [];
+
+function createSpike(){
+
+    const top =
+    Math.random() &gt; .5;
+
+    spikes.push({
+
+        x:canvas.width + 60,
+
+        width:
+        player.size * .9,
+
+        height:
+        player.size * .9,
+
+        top,
+
+        scored:false
+    });
+}
+
+function drawBackground(){
+
+    const gradient =
+    ctx.createLinearGradient(
+        0,0,0,canvas.height
+    );
+
+    gradient.addColorStop(0,"#091022");
+    gradient.addColorStop(1,"#050816");
+
+    ctx.fillStyle = gradient;
+
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    for(let i=0;i&lt;80;i++){
+
+        const x =
+        ((i * 170)
+        -
+        performance.now() * .015)
+        %
+        (canvas.width + 200);
+
+        const y =
+        (i * 97)
+        %
+        canvas.height;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            x,
+            y,
+            (i % 3)+.5,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fillStyle =
+        "rgba(255,255,255,.45)";
+
+        ctx.fill();
+    }
+}
+
+function drawWalls(){
+
+    ctx.fillStyle = "#1c2745";
+
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        CEILING
+    );
+
+    ctx.fillStyle = "#17203a";
+
+    ctx.fillRect(
+        0,
+        canvas.height - FLOOR,
+        canvas.width,
+        FLOOR
+    );
+}
+
+function roundRect(x,y,w,h,r){
+
+    ctx.beginPath();
+
+    ctx.moveTo(x+r,y);
+    ctx.lineTo(x+w-r,y);
+
+    ctx.quadraticCurveTo(
+        x+w,y,
+        x+w,y+r
+    );
+
+    ctx.lineTo(
+        x+w,
+        y+h-r
+    );
+
+    ctx.quadraticCurveTo(
+        x+w,y+h,
+        x+w-r,y+h
+    );
+
+    ctx.lineTo(
+        x+r,y+h
+    );
+
+    ctx.quadraticCurveTo(
+        x,y+h,
+        x,y+h-r
+    );
+
+    ctx.lineTo(
+        x,y+r
+    );
+
+    ctx.quadraticCurveTo(
+        x,y,
+        x+r,y
+    );
+
+    ctx.closePath();
+}
+
+function drawPlayer(){
+
+    ctx.save();
+
+    player.rotation +=
+    player.velY * .03;
+
+    ctx.translate(
+        player.x + player.size/2,
+        player.y + player.size/2
+    );
+
+    ctx.rotate(player.rotation);
+
+    const gradient =
+    ctx.createLinearGradient(
+        -30,-30,30,30
+    );
+
+    gradient.addColorStop(0,"#7f8fd6");
+    gradient.addColorStop(1,"#5665aa");
+
+    ctx.fillStyle = gradient;
+
+    roundRect(
+        -player.size/2,
+        -player.size/2,
+        player.size,
+        player.size,
+        14
+    );
+
+    ctx.fill();
+
+    ctx.restore();
+}
+
+function drawSpikes(){
+
+    spikes.forEach(spike=&gt;{
+
+        const y =
+        spike.top
+        ?
+        CEILING
+        :
+        canvas.height -
+        FLOOR -
+        spike.height;
+
+        ctx.fillStyle = "#dde4ff";
+
+        ctx.beginPath();
+
+        if(spike.top){
+
+            ctx.moveTo(spike.x,y);
+
+            ctx.lineTo(
+                spike.x + spike.width/2,
+                y + spike.height
+            );
+
+            ctx.lineTo(
+                spike.x + spike.width,
+                y
+            );
+
+        }else{
+
+            ctx.moveTo(
+                spike.x,
+                y + spike.height
+            );
+
+            ctx.lineTo(
+                spike.x + spike.width/2,
+                y
+            );
+
+            ctx.lineTo(
+                spike.x + spike.width,
+                y + spike.height
+            );
+        }
+
+        ctx.closePath();
+
+        ctx.fill();
+    });
+}
+
+function updatePlayer(){
+
+    player.velY +=
+    gravity * gravityDirection;
+
+    player.y += player.velY;
+
+    if(player.y &lt; CEILING){
+
+        player.y = CEILING;
+        player.velY = 0;
+    }
+
+    if(
+        player.y + player.size
+        &gt;
+        canvas.height - FLOOR
+    ){
+
+        player.y =
+        canvas.height -
+        FLOOR -
+        player.size;
+
+        player.velY = 0;
+    }
+}
+
+function updateSpikes(){
+
+    spikes.forEach(spike=&gt;{
+
+        spike.x -= speed;
+
+        const y =
+        spike.top
+        ?
+        CEILING
+        :
+        canvas.height -
+        FLOOR -
+        spike.height;
+
+        if(
+
+            player.x
+            &lt;
+            spike.x + spike.width
+
+            &amp;&amp;
+
+            player.x + player.size
+            &gt;
+            spike.x
+
+            &amp;&amp;
+
+            player.y
+            &lt;
+            y + spike.height
+
+            &amp;&amp;
+
+            player.y + player.size
+            &gt;
+            y
+
+        ){
+
+            endGame();
+        }
+
+        if(
+
+            !spike.scored
+
+            &amp;&amp;
+
+            spike.x + spike.width
+            &lt;
+            player.x
+
+        ){
+
+            spike.scored = true;
+
+            score++;
+            coins++;
+
+            document.getElementById("distance").innerText =
+            "Distance: " + score;
+
+            document.getElementById("coins").innerText =
+            "Coins: " + (totalCoins + coins);
+
+            if(score % 25 === 0){
+                speed += .25;
+            }
+        }
+    });
+
+    spikes =
+    spikes.filter(
+        spike =&gt; spike.x &gt; -100
+    );
+}
+
+function flipGravity(){
+
+    const now = Date.now();
+
+    if(now - lastTap &lt; 120)
+    return;
+
+    lastTap = now;
+
+    if(!gameRunning) return;
+    if(paused) return;
+
+    gravityDirection *= -1;
+
+    player.velY =
+    -player.velY * .2;
+
+    player.velY +=
+    gravityDirection * 7;
+}
+
+function gameLoop(){
+
+    drawBackground();
+
+    if(
+        gameRunning &amp;&amp;
+        !paused
+    ){
+
+        updatePlayer();
+        updateSpikes();
+    }
+
+    drawWalls();
+    drawSpikes();
+    drawPlayer();
+
+    requestAnimationFrame(gameLoop);
+}
+
+gameLoop();
+
+function startGame(){
+
+    document.getElementById("startScreen").style.display = "none";
+
+    gameRunning = true;
+
+    document.getElementById("coins").innerText =
+    "Coins: " + totalCoins;
+
+    spikeLoop =
+    setInterval(()=&gt;{
+
+        if(
+            gameRunning &amp;&amp;
+            !paused
+        ){
+
+            createSpike();
+
+            if(Math.random() &gt; .76){
+
+                setTimeout(()=&gt;{
+
+                    if(gameRunning){
+                        createSpike();
+                    }
+
+                },550);
+            }
+        }
+
+    },1300);
+}
+
+function endGame(){
+
+    gameRunning = false;
+
+    clearInterval(spikeLoop);
+
+    totalCoins += coins;
+
+    localStorage.setItem(
+        "flipCoins",
+        totalCoins
+    );
+
+    if(score &gt; highScore){
+
+        highScore = score;
+
+        localStorage.setItem(
+            "flipHigh",
+            highScore
+        );
+    }
+
+    document.getElementById("finalDistance").innerText =
+    "Distance: " + score;
+
+    document.getElementById("finalCoins").innerText =
+    "Coins Earned: " + coins;
+
+    document.getElementById("finalHigh").innerText =
+    "High Score: " + highScore;
+
+    document.getElementById("finalEntered").innerText =
+    "You entered with " +
+    (totalCoins - coins) +
+    " coins";
+
+    document.getElementById("gameOver").style.display = "flex";
+}
+
+function restartGame(){
+    location.reload();
+}
+
+function openCredits(){
+    document.getElementById("creditsScreen").style.display = "flex";
+}
+
+function closeCredits(){
+    document.getElementById("creditsScreen").style.display = "none";
+}
+
+function openShop(){
+    document.getElementById("shopScreen").style.display = "flex";
+}
+
+function closeShop(){
+    document.getElementById("shopScreen").style.display = "none";
+}
+
+document.getElementById("pauseBtn").onclick = ()=&gt;{
+
+    if(!gameRunning)
+    return;
+
+    paused = true;
+
+    document.getElementById("pauseMenu").style.display = "fl
