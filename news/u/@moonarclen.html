@@ -1,1 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>@moonarclen Profile • Moon Arclen | News</title>
 
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+
+body{
+    background: radial-gradient(circle at top,#11183a,#060814 55%,#000);
+    color:#fff;
+    min-height:100vh;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(2px 2px at 20% 30%, white, transparent),
+      radial-gradient(2px 2px at 70% 20%, white, transparent),
+      radial-gradient(1px 1px at 80% 60%, white, transparent),
+      radial-gradient(2px 2px at 35% 80%, white, transparent),
+      radial-gradient(1px 1px at 10% 70%, white, transparent);
+    background-size:280px 280px;
+    animation:stars 70s linear infinite;
+    opacity:.6;
+    z-index:-1;
+}
+
+@keyframes stars{
+    from{transform:translateY(0)}
+    to{transform:translateY(-280px)}
+}
+
+.container{
+    width:min(900px,92%);
+    margin:auto;
+    padding:50px 0;
+}
+
+.profile{
+    background:rgba(255,255,255,0.05);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.1);
+    border-radius:22px;
+    padding:35px;
+    text-align:center;
+    box-shadow:0 0 30px rgba(100,160,255,.1);
+}
+
+.profile img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #8db6ff;
+    box-shadow:0 0 25px rgba(130,180,255,.4);
+    margin-bottom:15px;
+}
+
+.profile h1{
+    font-size:2rem;
+    margin-bottom:6px;
+}
+
+.profile .username{
+    color:#8db6ff;
+    font-size:1rem;
+    margin-bottom:18px;
+}
+
+.profile .bio{
+    max-width:700px;
+    margin:auto;
+    line-height:1.8;
+    color:#dce8ff;
+    font-size:1rem;
+}
+
+.section{
+    margin-top:35px;
+    background:rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:18px;
+    padding:25px;
+}
+
+.section h2{
+    margin-bottom:16px;
+    color:#cfe2ff;
+}
+
+.article-link{
+    display:block;
+    text-decoration:none;
+    color:white;
+    padding:18px;
+    background:rgba(80,140,255,.08);
+    border:1px solid rgba(120,170,255,.25);
+    border-radius:14px;
+    transition:.3s;
+}
+
+.article-link:hover{
+    transform:translateY(-3px);
+    box-shadow:0 0 20px rgba(120,180,255,.25);
+}
+
+.contact-btn{
+    display:inline-block;
+    margin-top:15px;
+    text-decoration:none;
+    padding:12px 20px;
+    border-radius:12px;
+    color:#8db6ff;
+    border:1px solid rgba(120,170,255,.35);
+    background:rgba(80,140,255,.12);
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="profile">
+        <img src="arclen.png" alt="Moon Arclen">
+
+        <h1>Moon Arclen</h1>
+        <div class="username">@moonarclen</div>
+
+        <div class="bio">
+            Online creator, community member, and web developer. Formerly known as MoonGaming.
+            Long-time supporter of creator communities, currently documenting online moderation events
+            and preserving community-related stories.
+        </div>
+
+        <a class="contact-btn" href="mailto:hello@ma.work.gd?subject=Contact%20Moon%20Arclen">
+            hello@ma.work.gd
+        </a>
+    </div>
+
+    <div class="section">
+        <h2>Published Articles</h2>
+
+        <a class="article-link" href="/news/articles/1.html">
+            <strong>The Story Behind My Ban From a Community I Once Called Home</strong><br>
+            <span style="opacity:.7;font-size:.95rem;">A personal report regarding moderation, bans, and community history.</span>
+        </a>
+    </div>
+
+</div>
+
+</body>
+  </html>
