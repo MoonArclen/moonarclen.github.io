@@ -1,14 +1,14 @@
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-&lt;meta charset="UTF-8"&gt;
-&lt;meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"&gt;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-&lt;title&gt;Flip Me Not&lt;/title&gt;
+<title>Flip Me Not</title>
 
-&lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/&gt;
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
-&lt;style&gt;
+<style>
 
 *{
     margin:0;
@@ -328,269 +328,269 @@ canvas{
     }
 }
 
-&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
+</style>
+</head>
+<body>
 
-&lt;canvas id="game"&gt;&lt;/canvas&gt;
+<canvas id="game"></canvas>
 
-&lt;div id="hud"&gt;
+<div id="hud">
 
-    &lt;div id="logo"&gt;
+    <div id="logo">
         Flip Me Not
-    &lt;/div&gt;
+    </div>
 
-    &lt;div id="distance"&gt;
+    <div id="distance">
         Distance: 0
-    &lt;/div&gt;
+    </div>
 
-    &lt;div id="coins"&gt;
+    <div id="coins">
         Coins: 0
-    &lt;/div&gt;
+    </div>
 
-&lt;/div&gt;
+</div>
 
-&lt;button id="pauseBtn"&gt;
-    &lt;i class="fa-solid fa-pause"&gt;&lt;/i&gt;
-&lt;/button&gt;
+<button id="pauseBtn">
+    <i class="fa-solid fa-pause"></i>
+</button>
 
-&lt;div class="screen" id="startScreen"&gt;
+<div class="screen" id="startScreen">
 
-    &lt;div class="panel"&gt;
+    <div class="panel">
 
-        &lt;div id="title"&gt;
-            Flip&lt;br&gt;Me Not
-        &lt;/div&gt;
+        <div id="title">
+            Flip<br>Me Not
+        </div>
 
-        &lt;div id="subtitle"&gt;
-            Flip gravity.&lt;br&gt;
-            Dodge spikes.&lt;br&gt;
+        <div id="subtitle">
+            Flip gravity.<br>
+            Dodge spikes.<br>
             Survive forever.
-        &lt;/div&gt;
+        </div>
 
-        &lt;div id="menuStats"&gt;
+        <div id="menuStats">
 
-            &lt;div class="menuStat"&gt;
-                &lt;span&gt;Total Coins&lt;/span&gt;
-                &lt;strong id="menuCoins"&gt;0&lt;/strong&gt;
-            &lt;/div&gt;
+            <div class="menuStat">
+                <span>Total Coins</span>
+                <strong id="menuCoins">0</strong>
+            </div>
 
-            &lt;div class="menuStat"&gt;
-                &lt;span&gt;High Score&lt;/span&gt;
-                &lt;strong id="menuHigh"&gt;0&lt;/strong&gt;
-            &lt;/div&gt;
+            <div class="menuStat">
+                <span>High Score</span>
+                <strong id="menuHigh">0</strong>
+            </div>
 
-        &lt;/div&gt;
+        </div>
 
-        &lt;button class="menuBtn playBtn" onclick="startGame()"&gt;
+        <button class="menuBtn playBtn" onclick="startGame()">
             Play
-        &lt;/button&gt;
+        </button>
 
-        &lt;button class="menuBtn shopBtn" onclick="openShop()"&gt;
+        <button class="menuBtn shopBtn" onclick="openShop()">
             Shop
-        &lt;/button&gt;
+        </button>
 
-        &lt;button class="menuBtn creditBtn" onclick="openCredits()"&gt;
+        <button class="menuBtn creditBtn" onclick="openCredits()">
             Credits
-        &lt;/button&gt;
+        </button>
 
-        &lt;div id="socialWrap"&gt;
+        <div id="socialWrap">
 
-            &lt;div id="socials"&gt;
+            <div id="socials">
 
-                &lt;a href="https://youtube.com" target="_blank"&gt;
-                    &lt;i class="fa-brands fa-youtube"&gt;&lt;/i&gt;
-                &lt;/a&gt;
+                <a href="https://youtube.com" target="_blank">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
 
-                &lt;a href="https://discord.com" target="_blank"&gt;
-                    &lt;i class="fa-brands fa-discord"&gt;&lt;/i&gt;
-                &lt;/a&gt;
+                <a href="https://discord.com" target="_blank">
+                    <i class="fa-brands fa-discord"></i>
+                </a>
 
-                &lt;a href="https://twitch.tv" target="_blank"&gt;
-                    &lt;i class="fa-brands fa-twitch"&gt;&lt;/i&gt;
-                &lt;/a&gt;
+                <a href="https://twitch.tv" target="_blank">
+                    <i class="fa-brands fa-twitch"></i>
+                </a>
 
-                &lt;a href="https://github.com" target="_blank"&gt;
-                    &lt;i class="fa-brands fa-github"&gt;&lt;/i&gt;
-                &lt;/a&gt;
+                <a href="https://github.com" target="_blank">
+                    <i class="fa-brands fa-github"></i>
+                </a>
 
-            &lt;/div&gt;
+            </div>
 
-            &lt;div id="copyright"&gt;
-                © Music &amp; Art
-            &lt;/div&gt;
+            <div id="copyright">
+                © Music & Art
+            </div>
 
-        &lt;/div&gt;
+        </div>
 
-    &lt;/div&gt;
+    </div>
 
-&lt;/div&gt;
+</div>
 
-&lt;div class="screen" id="creditsScreen"&gt;
+<div class="screen" id="creditsScreen">
 
-    &lt;div class="panel"&gt;
+    <div class="panel">
 
-        &lt;button class="closeBtn" onclick="closeCredits()"&gt;
+        <button class="closeBtn" onclick="closeCredits()">
             ✕
-        &lt;/button&gt;
+        </button>
 
-        &lt;div id="creditsContent"&gt;
+        <div id="creditsContent">
 
-            &lt;h1&gt;Credits&lt;/h1&gt;
+            <h1>Credits</h1>
 
-            &lt;div class="creditRole"&gt;
+            <div class="creditRole">
                 Game Creator
-            &lt;/div&gt;
+            </div>
 
-            &lt;div class="creditName"&gt;
+            <div class="creditName">
                 Moon Arclen
-            &lt;/div&gt;
+            </div>
 
-            &lt;div class="creditRole"&gt;
+            <div class="creditRole">
                 Gameplay
-            &lt;/div&gt;
+            </div>
 
-            &lt;div class="creditName"&gt;
+            <div class="creditName">
                 Gravity Flip System
-            &lt;/div&gt;
+            </div>
 
-            &lt;div class="creditRole"&gt;
+            <div class="creditRole">
                 Style
-            &lt;/div&gt;
+            </div>
 
-            &lt;div class="creditName"&gt;
+            <div class="creditName">
                 Handmade Cosmic Design
-            &lt;/div&gt;
+            </div>
 
-            &lt;div class="creditRole"&gt;
+            <div class="creditRole">
                 Engine
-            &lt;/div&gt;
+            </div>
 
-            &lt;div class="creditName"&gt;
+            <div class="creditName">
                 HTML CSS JavaScript
-            &lt;/div&gt;
+            </div>
 
-        &lt;/div&gt;
+        </div>
 
-    &lt;/div&gt;
+    </div>
 
-&lt;/div&gt;
+</div>
 
-&lt;div class="screen" id="shopScreen"&gt;
+<div class="screen" id="shopScreen">
 
-    &lt;div class="panel"&gt;
+    <div class="panel">
 
-        &lt;button class="closeBtn" onclick="closeShop()"&gt;
+        <button class="closeBtn" onclick="closeShop()">
             ✕
-        &lt;/button&gt;
+        </button>
 
-        &lt;h1&gt;Shop&lt;/h1&gt;
+        <h1>Shop</h1>
 
-        &lt;div id="shopGrid"&gt;
+        <div id="shopGrid">
 
-            &lt;div class="shopItem"&gt;
-                &lt;div class="shopIcon"&gt;?&lt;/div&gt;
-                &lt;div class="shopName"&gt;Coming Soon&lt;/div&gt;
-            &lt;/div&gt;
+            <div class="shopItem">
+                <div class="shopIcon">?</div>
+                <div class="shopName">Coming Soon</div>
+            </div>
 
-            &lt;div class="shopItem"&gt;
-                &lt;div class="shopIcon"&gt;?&lt;/div&gt;
-                &lt;div class="shopName"&gt;Coming Soon&lt;/div&gt;
-            &lt;/div&gt;
+            <div class="shopItem">
+                <div class="shopIcon">?</div>
+                <div class="shopName">Coming Soon</div>
+            </div>
 
-            &lt;div class="shopItem"&gt;
-                &lt;div class="shopIcon"&gt;?&lt;/div&gt;
-                &lt;div class="shopName"&gt;Coming Soon&lt;/div&gt;
-            &lt;/div&gt;
+            <div class="shopItem">
+                <div class="shopIcon">?</div>
+                <div class="shopName">Coming Soon</div>
+            </div>
 
-            &lt;div class="shopItem"&gt;
-                &lt;div class="shopIcon"&gt;?&lt;/div&gt;
-                &lt;div class="shopName"&gt;Coming Soon&lt;/div&gt;
-            &lt;/div&gt;
+            <div class="shopItem">
+                <div class="shopIcon">?</div>
+                <div class="shopName">Coming Soon</div>
+            </div>
 
-        &lt;/div&gt;
+        </div>
 
-    &lt;/div&gt;
+    </div>
 
-&lt;/div&gt;
+</div>
 
-&lt;div class="screen" id="pauseMenu"&gt;
+<div class="screen" id="pauseMenu">
 
-    &lt;div class="panel"&gt;
+    <div class="panel">
 
-        &lt;h1&gt;Paused&lt;/h1&gt;
+        <h1>Paused</h1>
 
-        &lt;button class="menuBtn playBtn" onclick="resumeGame()"&gt;
+        <button class="menuBtn playBtn" onclick="resumeGame()">
             Resume
-        &lt;/button&gt;
+        </button>
 
-        &lt;button class="menuBtn creditBtn" onclick="location.reload()"&gt;
+        <button class="menuBtn creditBtn" onclick="location.reload()">
             Quit
-        &lt;/button&gt;
+        </button>
 
-    &lt;/div&gt;
+    </div>
 
-&lt;/div&gt;
+</div>
 
-&lt;div class="screen" id="gameOver"&gt;
+<div class="screen" id="gameOver">
 
-    &lt;div class="panel"&gt;
+    <div class="panel">
 
-        &lt;h1&gt;Game Over&lt;/h1&gt;
+        <h1>Game Over</h1>
 
-        &lt;div class="finalText" id="finalDistance"&gt;
+        <div class="finalText" id="finalDistance">
             Distance: 0
-        &lt;/div&gt;
+        </div>
 
-        &lt;div class="finalText" id="finalCoins"&gt;
+        <div class="finalText" id="finalCoins">
             Coins Earned: 0
-        &lt;/div&gt;
+        </div>
 
-        &lt;div class="finalText" id="finalHigh"&gt;
+        <div class="finalText" id="finalHigh">
             High Score: 0
-        &lt;/div&gt;
+        </div>
 
-        &lt;div class="finalText" id="finalEntered"&gt;
+        <div class="finalText" id="finalEntered">
             You entered with 0 coins
-        &lt;/div&gt;
+        </div>
 
-        &lt;button class="menuBtn playBtn" onclick="restartGame()"&gt;
+        <button class="menuBtn playBtn" onclick="restartGame()">
             Play Again
-        &lt;/button&gt;
+        </button>
 
-        &lt;button class="menuBtn creditBtn" onclick="location.reload()"&gt;
+        <button class="menuBtn creditBtn" onclick="location.reload()">
             Main Menu
-        &lt;/button&gt;
+        </button>
 
-        &lt;div id="shareWrap"&gt;
+        <div id="shareWrap">
 
-            &lt;div id="shareTitle"&gt;
+            <div id="shareTitle">
                 Share Score
-            &lt;/div&gt;
+            </div>
 
-            &lt;div id="shareButtons"&gt;
+            <div id="shareButtons">
 
-                &lt;button class="shareBtn" onclick="shareTwitter()"&gt;
-                    &lt;i class="fa-brands fa-x-twitter"&gt;&lt;/i&gt;
-                &lt;/button&gt;
+                <button class="shareBtn" onclick="shareTwitter()">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </button>
 
-                &lt;button class="shareBtn" onclick="shareDiscord()"&gt;
-                    &lt;i class="fa-brands fa-discord"&gt;&lt;/i&gt;
-                &lt;/button&gt;
+                <button class="shareBtn" onclick="shareDiscord()">
+                    <i class="fa-brands fa-discord"></i>
+                </button>
 
-                &lt;button class="shareBtn" onclick="shareCopy()"&gt;
-                    &lt;i class="fa-solid fa-link"&gt;&lt;/i&gt;
-                &lt;/button&gt;
+                <button class="shareBtn" onclick="shareCopy()">
+                    <i class="fa-solid fa-link"></i>
+                </button>
 
-            &lt;/div&gt;
+            </div>
 
-        &lt;/div&gt;
+        </div>
 
-    &lt;/div&gt;
+    </div>
 
-&lt;/div&gt;
+</div>
 
-&lt;script&gt;
+<script>
 
 const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
@@ -668,7 +668,7 @@ let spikes = [];
 function createSpike(){
 
     const top =
-    Math.random() &gt; .5;
+    Math.random() > .5;
 
     spikes.push({
 
@@ -705,7 +705,7 @@ function drawBackground(){
         canvas.height
     );
 
-    for(let i=0;i&lt;80;i++){
+    for(let i=0;i<80;i++){
 
         const x =
         ((i * 170)
@@ -839,7 +839,7 @@ function drawPlayer(){
 
 function drawSpikes(){
 
-    spikes.forEach(spike=&gt;{
+    spikes.forEach(spike=>{
 
         const y =
         spike.top
@@ -899,7 +899,7 @@ function updatePlayer(){
 
     player.y += player.velY;
 
-    if(player.y &lt; CEILING){
+    if(player.y < CEILING){
 
         player.y = CEILING;
         player.velY = 0;
@@ -907,7 +907,7 @@ function updatePlayer(){
 
     if(
         player.y + player.size
-        &gt;
+        >
         canvas.height - FLOOR
     ){
 
@@ -922,7 +922,7 @@ function updatePlayer(){
 
 function updateSpikes(){
 
-    spikes.forEach(spike=&gt;{
+    spikes.forEach(spike=>{
 
         spike.x -= speed;
 
@@ -938,25 +938,25 @@ function updateSpikes(){
         if(
 
             player.x
-            &lt;
+            <
             spike.x + spike.width
 
-            &amp;&amp;
+            &&
 
             player.x + player.size
-            &gt;
+            >
             spike.x
 
-            &amp;&amp;
+            &&
 
             player.y
-            &lt;
+            <
             y + spike.height
 
-            &amp;&amp;
+            &&
 
             player.y + player.size
-            &gt;
+            >
             y
 
         ){
@@ -968,10 +968,10 @@ function updateSpikes(){
 
             !spike.scored
 
-            &amp;&amp;
+            &&
 
             spike.x + spike.width
-            &lt;
+            <
             player.x
 
         ){
@@ -995,7 +995,7 @@ function updateSpikes(){
 
     spikes =
     spikes.filter(
-        spike =&gt; spike.x &gt; -100
+        spike => spike.x > -100
     );
 }
 
@@ -1003,7 +1003,7 @@ function flipGravity(){
 
     const now = Date.now();
 
-    if(now - lastTap &lt; 120)
+    if(now - lastTap < 120)
     return;
 
     lastTap = now;
@@ -1025,7 +1025,7 @@ function gameLoop(){
     drawBackground();
 
     if(
-        gameRunning &amp;&amp;
+        gameRunning &&
         !paused
     ){
 
@@ -1052,18 +1052,18 @@ function startGame(){
     "Coins: " + totalCoins;
 
     spikeLoop =
-    setInterval(()=&gt;{
+    setInterval(()=>{
 
         if(
-            gameRunning &amp;&amp;
+            gameRunning &&
             !paused
         ){
 
             createSpike();
 
-            if(Math.random() &gt; .76){
+            if(Math.random() > .76){
 
-                setTimeout(()=&gt;{
+                setTimeout(()=>{
 
                     if(gameRunning){
                         createSpike();
@@ -1089,7 +1089,7 @@ function endGame(){
         totalCoins
     );
 
-    if(score &gt; highScore){
+    if(score > highScore){
 
         highScore = score;
 
@@ -1136,11 +1136,90 @@ function closeShop(){
     document.getElementById("shopScreen").style.display = "none";
 }
 
-document.getElementById("pauseBtn").onclick = ()=&gt;{
+document.getElementById("pauseBtn").onclick = ()=>{
 
     if(!gameRunning)
     return;
 
     paused = true;
 
-    document.getElementById("pauseMenu").style.display = "fl
+    document.getElementById("pauseMenu").style.display = "flex";
+};
+
+function resumeGame(){
+
+    paused = false;
+
+    document.getElementById("pauseMenu").style.display = "none";
+}
+
+function shareTwitter(){
+
+    const text =
+    encodeURIComponent(
+        "I scored " +
+        score +
+        " in Flip Me Not!"
+    );
+
+    window.open(
+        "https://twitter.com/intent/tweet?text=" + text,
+        "_blank"
+    );
+}
+
+function shareDiscord(){
+
+    navigator.clipboard.writeText(
+        "I scored " +
+        score +
+        " in Flip Me Not!"
+    );
+
+    alert("Score copied for Discord!");
+}
+
+function shareCopy(){
+
+    navigator.clipboard.writeText(
+        "I scored " +
+        score +
+        " in Flip Me Not!"
+    );
+
+    alert("Score copied!");
+}
+
+window.addEventListener(
+"keydown",
+e=>{
+
+    if(e.code === "Space"){
+
+        e.preventDefault();
+
+        flipGravity();
+    }
+});
+
+window.addEventListener(
+"pointerdown",
+e=>{
+
+    const tag =
+    e.target.tagName;
+
+    if(
+        tag === "BUTTON"
+        ||
+        tag === "A"
+        ||
+        e.target.closest(".panel")
+    ) return;
+
+    flipGravity();
+});
+
+</script>
+</body>
+    </html>
