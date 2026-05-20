@@ -1,1 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>User</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<style>
+body{
+ margin:0;
+ background:#050814;
+ color:white;
+ font-family:Arial;
+ min-height:100vh;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+}
+.card{
+ width:min(800px,92%);
+ background:rgba(255,255,255,.05);
+ padding:30px;
+ border-radius:20px;
+ text-align:center;
+}
+img{
+ width:120px;
+ height:120px;
+ border-radius:50%;
+ object-fit:cover;
+ margin-bottom:15px;
+}
+.username{color:#8db6ff}
+</style>
+</head>
+<body>
+
+<div class="card">
+    <img id="avatar" src="/assets/default.png">
+    <h1 id="name">Loading...</h1>
+    <p class="username" id="username"></p>
+    <p id="bio"></p>
+</div>
+
+<script>
+const supabaseUrl = "https://iqevstjtrvfkqvifidxv.supabase.co/users";
+const supabaseKey = "sb_publishable_CfdsbxOmI2eZDy8jnZUWuQ__TXIH5kx";
+const db = supabase.createClient(supabaseUrl, supabaseKey);
+
+let path = window.location.pathname;
+let user = path.split("/@/")[1];
+
+if(!user){
+    const params = new URLSearchParams(location.search);
+    user = params.get("user");
+}
+
+async function load(){
+    if(!user) return;
+
+    const { data } = await db
+      .from("users")
+      .select("*")
+      .eq("username", user)
+      .single();
+
+    if(!data){
+        document.body.innerHTML="<h1>User not found</h1>";
+        return;
+    }
+
+    document.getElementById("name").textContent = data.display_name;
+    document.getElementById("username").textContent = "@"+data.username;
+    document.getElementById("bio").textContent = data.bio;
+    document.getElementById("avatar").src = data.avatar_url;
+}
+
+load();
+</script>
+
+</body>
+</html>
