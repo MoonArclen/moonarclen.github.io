@@ -3,81 +3,104 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>User</title>
+<title>User Profile</title>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
+*{box-sizing:border-box;font-family:Arial,sans-serif}
 body{
- margin:0;
- background:#050814;
- color:white;
- font-family:Arial;
- min-height:100vh;
- display:flex;
- justify-content:center;
- align-items:center;
+  margin:0;
+  min-height:100vh;
+  background:radial-gradient(circle at top,#11183a,#060814 55%,#000);
+  color:#fff;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
 }
 .card{
- width:min(800px,92%);
- background:rgba(255,255,255,.05);
- padding:30px;
- border-radius:20px;
- text-align:center;
+  width:min(800px,95%);
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.12);
+  backdrop-filter:blur(14px);
+  border-radius:22px;
+  padding:30px;
+  text-align:center;
 }
 img{
- width:120px;
- height:120px;
- border-radius:50%;
- object-fit:cover;
- margin-bottom:15px;
+  width:120px;height:120px;border-radius:50%;
+  object-fit:cover;border:2px solid #8db6ff;
 }
 .username{color:#8db6ff}
+.error{color:#ff8f8f;white-space:pre-wrap;margin-top:20px}
 </style>
 </head>
 <body>
-
 <div class="card">
-    <img id="avatar" src="/assets/default.png">
-    <h1 id="name">Loading...</h1>
-    <p class="username" id="username"></p>
-    <p id="bio"></p>
+  <img id="avatar" src="/assets/default.png" alt="">
+  <h1 id="name">Loading...</h1>
+  <p class="username" id="username">@loading</p>
+  <p id="bio">Loading profile...</p>
+  <p><a id="email" style="color:#8db6ff"></a></p>
+  <div id="error" class="error"></div>
 </div>
 
 <script>
-const supabaseUrl = "https://iqevstjtrvfkqvifidxv.supabase.co/users";
+const supabaseUrl = "https://iqevstjtrvfkqvifidxv.supabase.co";
 const supabaseKey = "sb_publishable_CfdsbxOmI2eZDy8jnZUWuQ__TXIH5kx";
 const db = supabase.createClient(supabaseUrl, supabaseKey);
 
-let path = window.location.pathname;
-let user = path.split("/@/")[1];
+// supports:
+// /@/?user=moonarclen
+// /@/moonarclen  (with 404 redirect setups later)
+function getUsername(){
+  const params = new URLSearchParams(location.search);
+  if(params.get("user")) return params.get("user");
 
-if(!user){
-    const params = new URLSearchParams(location.search);
-    user = params.get("user");
+  const path = location.pathname;
+  const parts = path.split("/").filter(Boolean);
+  const atIndex = parts.indexOf("@");
+  if(atIndex !== -1 && parts[atIndex+1]) return decodeURIComponent(parts[atIndex+1]);
+
+  return null;
 }
 
-async function load(){
-    if(!user) return;
+async function loadUser(){
+  const user = getUsername();
+  if(!user){
+    document.getElementById("error").textContent =
+      "No username in URL.\nTry: /@/?user=moonarclen";
+    return;
+  }
 
-    const { data } = await db
-      .from("users")
-      .select("*")
-      .eq("username", user)
-      .single();
+  const { data, error } = await db
+    .from("users")
+    .select("*")
+    .eq("username", user)
+    .single();
 
-    if(!data){
-        document.body.innerHTML="<h1>User not found</h1>";
-        return;
-    }
+  if(error){
+    document.getElementById("error").textContent =
+      "Supabase error:\n" + error.message + "\n\nCheck table policy.";
+    return;
+  }
 
-    document.getElementById("name").textContent = data.display_name;
-    document.getElementById("username").textContent = "@"+data.username;
-    document.getElementById("bio").textContent = data.bio;
-    document.getElementById("avatar").src = data.avatar_url;
+  if(!data){
+    document.getElementById("error").textContent = "User not found";
+    return;
+  }
+
+  document.title = data.display_name + " | Profile";
+  document.getElementById("name").textContent = data.display_name || user;
+  document.getElementById("username").textContent = "@" + data.username;
+  document.getElementById("bio").textContent = data.bio || "";
+  if(data.avatar_url) document.getElementById("avatar").src = data.avatar_url;
+  if(data.email){
+    document.getElementById("email").href = "mailto:" + data.email;
+    document.getElementById("email").textContent = data.email;
+  }
 }
 
-load();
+loadUser();
 </script>
-
 </body>
 </html>
