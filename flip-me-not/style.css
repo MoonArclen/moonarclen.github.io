@@ -27,11 +27,8 @@ canvas{position:fixed;inset:0;}
 .shopItem{background:#121b31;border-radius:22px;padding:18px;text-align:center;}
 .shopPreview{width:100%;height:90px;border-radius:18px;overflow:hidden;position:relative;}
 .cosmicPreview{background:linear-gradient(135deg,#4f68d8,#1b2340);}
-.cosmicPreview::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(255,255,255,.35) 1px,transparent 1px);background-size:22px 22px;}
 .trailPreview{background:linear-gradient(135deg,#1b2340,#6f7eff);}
-.trailPreview::after{content:"";position:absolute;width:140px;height:4px;background:white;top:42px;left:-20px;transform:rotate(-12deg);opacity:.75;}
 .meteorPreview{background:linear-gradient(135deg,#2a314d,#0e1222);}
-.meteorPreview::after{content:"";position:absolute;width:38px;height:38px;border-radius:12px;background:#7f8fff;top:26px;left:50%;transform:translateX(-50%) rotate(14deg);}
 .shopName{margin-top:12px;font-weight:bold;}
 .shopPrice{margin-top:8px;color:#98a5d5;}
 .infoText{margin-top:20px;line-height:1.8;color:#c7d0ef;}
