@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<meta name="viewport"
+content="width=device-width,
+initial-scale=1.0,
+maximum-scale=1.0,
+user-scalable=no">
 
 <title>Flip Me Not</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 
 <style>
 
@@ -17,7 +24,8 @@
     -webkit-tap-highlight-color:transparent;
 }
 
-html,body{
+html,
+body{
     width:100%;
     height:100%;
     overflow:hidden;
@@ -51,6 +59,7 @@ canvas{
     padding:28px;
     box-shadow:0 20px 70px rgba(0,0,0,.5);
     color:white;
+    position:relative;
 }
 
 #startScreen{
@@ -134,6 +143,30 @@ canvas{
     background:#38466e;
 }
 
+.settingsBtn{
+    background:#4f5f96;
+}
+
+.toggleBtn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:16px;
+    background:rgba(255,255,255,.06);
+    color:white;
+    font-size:1rem;
+    cursor:pointer;
+}
+
+.settingRow{
+    margin-top:20px;
+}
+
+.settingTitle{
+    margin-bottom:10px;
+    color:#c5d0f2;
+}
+
 #socialWrap{
     margin-top:24px;
 }
@@ -182,7 +215,8 @@ canvas{
     font-weight:900;
 }
 
-#distance,#coins{
+#distance,
+#coins{
     margin-top:5px;
     color:#aeb9dd;
 }
@@ -205,7 +239,8 @@ canvas{
 #creditsScreen,
 #shopScreen,
 #pauseMenu,
-#gameOver{
+#gameOver,
+#settingsScreen{
     display:none;
     background:rgba(0,0,0,.68);
 }
@@ -301,16 +336,6 @@ canvas{
     color:white;
     font-size:1rem;
     cursor:pointer;
-    transition:.15s;
-}
-
-.shareBtn:hover{
-    transform:translateY(-2px);
-    background:rgba(255,255,255,.12);
-}
-
-.shareBtn:active{
-    transform:scale(.96);
 }
 
 @media(max-width:650px){
@@ -394,6 +419,10 @@ canvas{
             Credits
         </button>
 
+        <button class="menuBtn settingsBtn" onclick="openSettings()">
+            Settings
+        </button>
+
         <div id="socialWrap">
 
             <div id="socials">
@@ -426,163 +455,70 @@ canvas{
 
 </div>
 
-<div class="screen" id="creditsScreen">
+<div class="screen" id="settingsScreen">
 
     <div class="panel">
 
-        <button class="closeBtn" onclick="closeCredits()">
+        <button class="closeBtn" onclick="closeSettings()">
             ✕
         </button>
 
-        <div id="creditsContent">
+        <h1>
+            Settings
+        </h1>
 
-            <h1>Credits</h1>
+        <div class="settingRow">
 
-            <div class="creditRole">
-                Game Creator
+            <div class="settingTitle">
+                Account
             </div>
 
-            <div class="creditName">
-                Moon Arclen
-            </div>
+            <button class="toggleBtn" onclick="loginGithub()">
+                Connect GitHub
+            </button>
 
-            <div class="creditRole">
-                Gameplay
-            </div>
+            <button class="toggleBtn"
+            style="margin-top:10px"
+            onclick="loginItch()">
+                Connect Itch.io
+            </button>
 
-            <div class="creditName">
-                Gravity Flip System
-            </div>
-
-            <div class="creditRole">
-                Style
-            </div>
-
-            <div class="creditName">
-                Handmade Cosmic Design
-            </div>
-
-            <div class="creditRole">
-                Engine
-            </div>
-
-            <div class="creditName">
-                HTML CSS JavaScript
+            <div id="accountStatus"
+            style="
+            margin-top:14px;
+            color:#9fb0e8;
+            font-size:.95rem;
+            ">
+                Not Connected
             </div>
 
         </div>
 
-    </div>
+        <div class="settingRow">
 
-</div>
-
-<div class="screen" id="shopScreen">
-
-    <div class="panel">
-
-        <button class="closeBtn" onclick="closeShop()">
-            ✕
-        </button>
-
-        <h1>Shop</h1>
-
-        <div id="shopGrid">
-
-            <div class="shopItem">
-                <div class="shopIcon">?</div>
-                <div class="shopName">Coming Soon</div>
+            <div class="settingTitle">
+                Music
             </div>
 
-            <div class="shopItem">
-                <div class="shopIcon">?</div>
-                <div class="shopName">Coming Soon</div>
-            </div>
-
-            <div class="shopItem">
-                <div class="shopIcon">?</div>
-                <div class="shopName">Coming Soon</div>
-            </div>
-
-            <div class="shopItem">
-                <div class="shopIcon">?</div>
-                <div class="shopName">Coming Soon</div>
-            </div>
+            <button class="toggleBtn"
+            id="musicToggle"
+            onclick="toggleMusic()">
+                Music: ON
+            </button>
 
         </div>
 
-    </div>
+        <div class="settingRow">
 
-</div>
-
-<div class="screen" id="pauseMenu">
-
-    <div class="panel">
-
-        <h1>Paused</h1>
-
-        <button class="menuBtn playBtn" onclick="resumeGame()">
-            Resume
-        </button>
-
-        <button class="menuBtn creditBtn" onclick="location.reload()">
-            Quit
-        </button>
-
-    </div>
-
-</div>
-
-<div class="screen" id="gameOver">
-
-    <div class="panel">
-
-        <h1>Game Over</h1>
-
-        <div class="finalText" id="finalDistance">
-            Distance: 0
-        </div>
-
-        <div class="finalText" id="finalCoins">
-            Coins Earned: 0
-        </div>
-
-        <div class="finalText" id="finalHigh">
-            High Score: 0
-        </div>
-
-        <div class="finalText" id="finalEntered">
-            You entered with 0 coins
-        </div>
-
-        <button class="menuBtn playBtn" onclick="restartGame()">
-            Play Again
-        </button>
-
-        <button class="menuBtn creditBtn" onclick="location.reload()">
-            Main Menu
-        </button>
-
-        <div id="shareWrap">
-
-            <div id="shareTitle">
-                Share Score
+            <div class="settingTitle">
+                Sound Effects
             </div>
 
-            <div id="shareButtons">
-
-                <button class="shareBtn" onclick="shareTwitter()">
-                    <i class="fa-brands fa-x-twitter"></i>
-                </button>
-
-                <button class="shareBtn" onclick="shareDiscord()">
-                    <i class="fa-brands fa-discord"></i>
-                </button>
-
-                <button class="shareBtn" onclick="shareCopy()">
-                    <i class="fa-solid fa-link"></i>
-                </button>
-
-            </div>
+            <button class="toggleBtn"
+            id="soundToggle"
+            onclick="toggleSounds()">
+                Sounds: ON
+            </button>
 
         </div>
 
@@ -592,634 +528,234 @@ canvas{
 
 <script>
 
-const canvas = document.getElementById("game");
-const ctx = canvas.getContext("2d");
+const canvas =
+document.getElementById("game");
+
+const ctx =
+canvas.getContext("2d");
 
 function resize(){
-    canvas.width = innerWidth;
-    canvas.height = innerHeight;
+
+    canvas.width =
+    innerWidth;
+
+    canvas.height =
+    innerHeight;
 }
 
 resize();
 
-window.addEventListener("resize",resize);
+window.addEventListener(
+"resize",
+resize
+);
 
-const FLOOR = 34;
-const CEILING = 34;
+let musicEnabled = true;
+let soundEnabled = true;
 
-let gravity = .85;
-let gravityDirection = 1;
+let accountData =
+JSON.parse(
+localStorage.getItem(
+"flipAccount"
+)
+) || null;
 
-let gameRunning = false;
-let paused = false;
+const music =
+new Audio(
+"https://ma.work.gd/sounds/Crimson-Moon"
+);
 
-let score = 0;
-let coins = 0;
-let speed = 7;
+music.loop = true;
+music.volume = .45;
 
-let spikeLoop;
-let lastTap = 0;
+const dieSound =
+new Audio(
+"https://ma.work.gd/sounds/die"
+);
+
+dieSound.volume = .8;
 
 let totalCoins =
 parseInt(
-localStorage.getItem("flipCoins") || 0
+localStorage.getItem(
+"flipCoins"
+) || 0
 );
 
 let highScore =
 parseInt(
-localStorage.getItem("flipHigh") || 0
+localStorage.getItem(
+"flipHigh"
+) || 0
 );
 
-const playerID =
-localStorage.getItem("flipPlayerID")
-||
-(
-"Player#" +
-Math.floor(
-1000 + Math.random() * 9000
-)
-);
+if(accountData){
 
-localStorage.setItem(
-"flipPlayerID",
-playerID
-);
+    totalCoins =
+    accountData.coins || 0;
 
-document.getElementById("menuCoins").innerText = totalCoins;
-document.getElementById("menuHigh").innerText = highScore;
-
-const player = {
-
-    x:160,
-    y:250,
-
-    size:
-    Math.min(
-        innerWidth * .09,
-        56
-    ),
-
-    velY:0,
-    rotation:0
-};
-
-let spikes = [];
-
-function createSpike(){
-
-    const top =
-    Math.random() > .5;
-
-    spikes.push({
-
-        x:canvas.width + 60,
-
-        width:
-        player.size * .9,
-
-        height:
-        player.size * .9,
-
-        top,
-
-        scored:false
-    });
+    highScore =
+    accountData.highScore || 0;
 }
 
-function drawBackground(){
+document.getElementById(
+"menuCoins"
+).innerText =
+totalCoins;
 
-    const gradient =
-    ctx.createLinearGradient(
-        0,0,0,canvas.height
-    );
+document.getElementById(
+"menuHigh"
+).innerText =
+highScore;
 
-    gradient.addColorStop(0,"#091022");
-    gradient.addColorStop(1,"#050816");
+function openSettings(){
 
-    ctx.fillStyle = gradient;
-
-    ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-    for(let i=0;i<80;i++){
-
-        const x =
-        ((i * 170)
-        -
-        performance.now() * .015)
-        %
-        (canvas.width + 200);
-
-        const y =
-        (i * 97)
-        %
-        canvas.height;
-
-        ctx.beginPath();
-
-        ctx.arc(
-            x,
-            y,
-            (i % 3)+.5,
-            0,
-            Math.PI*2
-        );
-
-        ctx.fillStyle =
-        "rgba(255,255,255,.45)";
-
-        ctx.fill();
-    }
+    document.getElementById(
+    "settingsScreen"
+    ).style.display =
+    "flex";
 }
 
-function drawWalls(){
+function closeSettings(){
 
-    ctx.fillStyle = "#1c2745";
-
-    ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        CEILING
-    );
-
-    ctx.fillStyle = "#17203a";
-
-    ctx.fillRect(
-        0,
-        canvas.height - FLOOR,
-        canvas.width,
-        FLOOR
-    );
+    document.getElementById(
+    "settingsScreen"
+    ).style.display =
+    "none";
 }
 
-function roundRect(x,y,w,h,r){
+function toggleMusic(){
 
-    ctx.beginPath();
+    musicEnabled =
+    !musicEnabled;
 
-    ctx.moveTo(x+r,y);
-    ctx.lineTo(x+w-r,y);
-
-    ctx.quadraticCurveTo(
-        x+w,y,
-        x+w,y+r
-    );
-
-    ctx.lineTo(
-        x+w,
-        y+h-r
-    );
-
-    ctx.quadraticCurveTo(
-        x+w,y+h,
-        x+w-r,y+h
-    );
-
-    ctx.lineTo(
-        x+r,y+h
-    );
-
-    ctx.quadraticCurveTo(
-        x,y+h,
-        x,y+h-r
-    );
-
-    ctx.lineTo(
-        x,y+r
-    );
-
-    ctx.quadraticCurveTo(
-        x,y,
-        x+r,y
-    );
-
-    ctx.closePath();
-}
-
-function drawPlayer(){
-
-    ctx.save();
-
-    player.rotation +=
-    player.velY * .03;
-
-    ctx.translate(
-        player.x + player.size/2,
-        player.y + player.size/2
-    );
-
-    ctx.rotate(player.rotation);
-
-    const gradient =
-    ctx.createLinearGradient(
-        -30,-30,30,30
-    );
-
-    gradient.addColorStop(0,"#7f8fd6");
-    gradient.addColorStop(1,"#5665aa");
-
-    ctx.fillStyle = gradient;
-
-    roundRect(
-        -player.size/2,
-        -player.size/2,
-        player.size,
-        player.size,
-        14
-    );
-
-    ctx.fill();
-
-    ctx.restore();
-}
-
-function drawSpikes(){
-
-    spikes.forEach(spike=>{
-
-        const y =
-        spike.top
+    document.getElementById(
+    "musicToggle"
+    ).innerText =
+    "Music: " +
+    (
+        musicEnabled
         ?
-        CEILING
+        "ON"
         :
-        canvas.height -
-        FLOOR -
-        spike.height;
+        "OFF"
+    );
 
-        ctx.fillStyle = "#dde4ff";
+    if(musicEnabled){
 
-        ctx.beginPath();
+        music.play()
+        .catch(()=>{});
 
-        if(spike.top){
+    }else{
 
-            ctx.moveTo(spike.x,y);
-
-            ctx.lineTo(
-                spike.x + spike.width/2,
-                y + spike.height
-            );
-
-            ctx.lineTo(
-                spike.x + spike.width,
-                y
-            );
-
-        }else{
-
-            ctx.moveTo(
-                spike.x,
-                y + spike.height
-            );
-
-            ctx.lineTo(
-                spike.x + spike.width/2,
-                y
-            );
-
-            ctx.lineTo(
-                spike.x + spike.width,
-                y + spike.height
-            );
-        }
-
-        ctx.closePath();
-
-        ctx.fill();
-    });
-}
-
-function updatePlayer(){
-
-    player.velY +=
-    gravity * gravityDirection;
-
-    player.y += player.velY;
-
-    if(player.y < CEILING){
-
-        player.y = CEILING;
-        player.velY = 0;
-    }
-
-    if(
-        player.y + player.size
-        >
-        canvas.height - FLOOR
-    ){
-
-        player.y =
-        canvas.height -
-        FLOOR -
-        player.size;
-
-        player.velY = 0;
+        music.pause();
     }
 }
 
-function updateSpikes(){
+function toggleSounds(){
 
-    spikes.forEach(spike=>{
+    soundEnabled =
+    !soundEnabled;
 
-        spike.x -= speed;
-
-        const y =
-        spike.top
+    document.getElementById(
+    "soundToggle"
+    ).innerText =
+    "Sounds: " +
+    (
+        soundEnabled
         ?
-        CEILING
+        "ON"
         :
-        canvas.height -
-        FLOOR -
-        spike.height;
-
-        if(
-
-            player.x
-            <
-            spike.x + spike.width
-
-            &&
-
-            player.x + player.size
-            >
-            spike.x
-
-            &&
-
-            player.y
-            <
-            y + spike.height
-
-            &&
-
-            player.y + player.size
-            >
-            y
-
-        ){
-
-            endGame();
-        }
-
-        if(
-
-            !spike.scored
-
-            &&
-
-            spike.x + spike.width
-            <
-            player.x
-
-        ){
-
-            spike.scored = true;
-
-            score++;
-            coins++;
-
-            document.getElementById("distance").innerText =
-            "Distance: " + score;
-
-            document.getElementById("coins").innerText =
-            "Coins: " + (totalCoins + coins);
-
-            if(score % 25 === 0){
-                speed += .25;
-            }
-        }
-    });
-
-    spikes =
-    spikes.filter(
-        spike => spike.x > -100
+        "OFF"
     );
 }
 
-function flipGravity(){
+function updateAccountUI(){
 
-    const now = Date.now();
+    if(accountData){
 
-    if(now - lastTap < 120)
+        document.getElementById(
+        "accountStatus"
+        ).innerText =
+        "Connected: " +
+        accountData.type +
+        " @" +
+        accountData.username;
+
+    }else{
+
+        document.getElementById(
+        "accountStatus"
+        ).innerText =
+        "Not Connected";
+    }
+}
+
+function loginGithub(){
+
+    const username =
+    prompt(
+    "Enter GitHub Username"
+    );
+
+    if(!username)
     return;
 
-    lastTap = now;
+    accountData = {
 
-    if(!gameRunning) return;
-    if(paused) return;
+        type:"GitHub",
+        username
+    };
 
-    gravityDirection *= -1;
-
-    player.velY =
-    -player.velY * .2;
-
-    player.velY +=
-    gravityDirection * 7;
+    saveAccount();
 }
 
-function gameLoop(){
+function loginItch(){
 
-    drawBackground();
+    const username =
+    prompt(
+    "Enter Itch.io Username"
+    );
 
-    if(
-        gameRunning &&
-        !paused
-    ){
+    if(!username)
+    return;
 
-        updatePlayer();
-        updateSpikes();
-    }
+    accountData = {
 
-    drawWalls();
-    drawSpikes();
-    drawPlayer();
+        type:"Itch.io",
+        username
+    };
 
-    requestAnimationFrame(gameLoop);
+    saveAccount();
 }
 
-gameLoop();
+function saveAccount(){
 
-function startGame(){
+    const saveData = {
 
-    document.getElementById("startScreen").style.display = "none";
+        type:
+        accountData.type,
 
-    gameRunning = true;
+        username:
+        accountData.username,
 
-    document.getElementById("coins").innerText =
-    "Coins: " + totalCoins;
+        coins:
+        totalCoins,
 
-    spikeLoop =
-    setInterval(()=>{
-
-        if(
-            gameRunning &&
-            !paused
-        ){
-
-            createSpike();
-
-            if(Math.random() > .76){
-
-                setTimeout(()=>{
-
-                    if(gameRunning){
-                        createSpike();
-                    }
-
-                },550);
-            }
-        }
-
-    },1300);
-}
-
-function endGame(){
-
-    gameRunning = false;
-
-    clearInterval(spikeLoop);
-
-    totalCoins += coins;
+        highScore:
+        highScore
+    };
 
     localStorage.setItem(
-        "flipCoins",
-        totalCoins
+    "flipAccount",
+    JSON.stringify(saveData)
     );
 
-    if(score > highScore){
-
-        highScore = score;
-
-        localStorage.setItem(
-            "flipHigh",
-            highScore
-        );
-    }
-
-    document.getElementById("finalDistance").innerText =
-    "Distance: " + score;
-
-    document.getElementById("finalCoins").innerText =
-    "Coins Earned: " + coins;
-
-    document.getElementById("finalHigh").innerText =
-    "High Score: " + highScore;
-
-    document.getElementById("finalEntered").innerText =
-    "You entered with " +
-    (totalCoins - coins) +
-    " coins";
-
-    document.getElementById("gameOver").style.display = "flex";
+    updateAccountUI();
 }
 
-function restartGame(){
-    location.reload();
-}
-
-function openCredits(){
-    document.getElementById("creditsScreen").style.display = "flex";
-}
-
-function closeCredits(){
-    document.getElementById("creditsScreen").style.display = "none";
-}
-
-function openShop(){
-    document.getElementById("shopScreen").style.display = "flex";
-}
-
-function closeShop(){
-    document.getElementById("shopScreen").style.display = "none";
-}
-
-document.getElementById("pauseBtn").onclick = ()=>{
-
-    if(!gameRunning)
-    return;
-
-    paused = true;
-
-    document.getElementById("pauseMenu").style.display = "flex";
-};
-
-function resumeGame(){
-
-    paused = false;
-
-    document.getElementById("pauseMenu").style.display = "none";
-}
-
-function shareTwitter(){
-
-    const text =
-    encodeURIComponent(
-        "I scored " +
-        score +
-        " in Flip Me Not!"
-    );
-
-    window.open(
-        "https://twitter.com/intent/tweet?text=" + text,
-        "_blank"
-    );
-}
-
-function shareDiscord(){
-
-    navigator.clipboard.writeText(
-        "I scored " +
-        score +
-        " in Flip Me Not!"
-    );
-
-    alert("Score copied for Discord!");
-}
-
-function shareCopy(){
-
-    navigator.clipboard.writeText(
-        "I scored " +
-        score +
-        " in Flip Me Not!"
-    );
-
-    alert("Score copied!");
-}
-
-window.addEventListener(
-"keydown",
-e=>{
-
-    if(e.code === "Space"){
-
-        e.preventDefault();
-
-        flipGravity();
-    }
-});
-
-window.addEventListener(
-"pointerdown",
-e=>{
-
-    const tag =
-    e.target.tagName;
-
-    if(
-        tag === "BUTTON"
-        ||
-        tag === "A"
-        ||
-        e.target.closest(".panel")
-    ) return;
-
-    flipGravity();
-});
+updateAccountUI();
 
 </script>
 </body>
-    </html>
+</html>
