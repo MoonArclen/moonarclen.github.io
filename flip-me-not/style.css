@@ -1,0 +1,332 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+body{
+    overflow:hidden;
+    background:#050816;
+    font-family:Arial,sans-serif;
+}
+
+canvas{
+    position:fixed;
+    inset:0;
+}
+
+.hidden{
+    display:none;
+}
+
+.screen{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.panel{
+    width:min(92vw,430px);
+
+    background:#0b1222;
+
+    border-radius:30px;
+
+    padding:28px;
+
+    color:white;
+
+    position:relative;
+}
+
+#title{
+    font-size:4rem;
+    line-height:.9;
+    font-weight:900;
+}
+
+#subtitle{
+    margin-top:16px;
+    color:#9aa8d6;
+    line-height:1.7;
+}
+
+#menuStats{
+    display:flex;
+    gap:12px;
+    margin-top:24px;
+}
+
+.menuStat{
+    flex:1;
+    background:#151d34;
+    border-radius:18px;
+    padding:14px;
+    text-align:center;
+}
+
+.menuStat span{
+    display:block;
+    color:#95a3d3;
+}
+
+.menuStat strong{
+    display:block;
+    margin-top:6px;
+    font-size:1.4rem;
+}
+
+.menuBtn,
+.toggleBtn{
+    width:100%;
+    padding:16px;
+    margin-top:12px;
+    border:none;
+    border-radius:18px;
+    background:#5f74da;
+    color:white;
+    font-size:1rem;
+    cursor:pointer;
+}
+
+.playBtn{
+    background:#6177dc;
+}
+
+.shopBtn{
+    background:#7558d8;
+}
+
+.settingsBtn{
+    background:#485d9e;
+}
+
+.leaderBtn{
+    background:#596bc7;
+}
+
+.closeBtn{
+    position:absolute;
+    top:16px;
+    right:16px;
+
+    width:46px;
+    height:46px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#151d34;
+
+    color:white;
+
+    cursor:pointer;
+}
+
+#socials{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top:24px;
+}
+
+#socials a{
+    width:50px;
+    height:50px;
+
+    border-radius:14px;
+
+    background:#151d34;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:white;
+
+    text-decoration:none;
+}
+
+#copyright{
+    text-align:center;
+    margin-top:12px;
+    color:#8ea0d8;
+}
+
+.shopGrid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:14px;
+
+    margin-top:22px;
+}
+
+.shopItem{
+    background:#121b31;
+
+    border-radius:22px;
+
+    padding:18px;
+
+    text-align:center;
+}
+
+.shopPreview{
+    width:100%;
+    height:90px;
+
+    border-radius:18px;
+
+    background:#1a2442;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.cosmicPreview{
+    background:
+    linear-gradient(
+    135deg,
+    #4f68d8,
+    #1b2340
+    );
+}
+
+.cosmicPreview::after{
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+    radial-gradient(
+    circle,
+    rgba(255,255,255,.4) 1px,
+    transparent 1px
+    );
+
+    background-size:22px 22px;
+
+    opacity:.45;
+}
+
+.trailPreview{
+    background:
+    linear-gradient(
+    135deg,
+    #1b2340,
+    #6f7eff
+    );
+}
+
+.trailPreview::after{
+    content:"";
+
+    position:absolute;
+
+    width:140px;
+    height:4px;
+
+    background:white;
+
+    top:42px;
+    left:-20px;
+
+    transform:rotate(-12deg);
+
+    opacity:.75;
+}
+
+.meteorPreview{
+    background:
+    linear-gradient(
+    135deg,
+    #2a314d,
+    #0e1222
+    );
+}
+
+.meteorPreview::after{
+    content:"";
+
+    position:absolute;
+
+    width:38px;
+    height:38px;
+
+    border-radius:12px;
+
+    background:#7f8fff;
+
+    top:26px;
+    left:50%;
+
+    transform:
+    translateX(-50%)
+    rotate(14deg);
+}
+
+.shopName{
+    margin-top:12px;
+    font-weight:bold;
+}
+
+.shopPrice{
+    margin-top:8px;
+    color:#9aa8d6;
+}
+
+.infoText{
+    margin-top:20px;
+    line-height:1.8;
+    color:#c4cdec;
+}
+
+#hud{
+    position:fixed;
+    top:16px;
+    left:16px;
+    z-index:10;
+    color:white;
+}
+
+#logo{
+    font-size:2rem;
+    font-weight:900;
+}
+
+#distance,
+#coins{
+    margin-top:6px;
+    color:#9aa8d6;
+}
+
+#pauseBtn{
+    position:fixed;
+    top:16px;
+    right:16px;
+
+    width:52px;
+    height:52px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#121b31;
+
+    color:white;
+
+    cursor:pointer;
+
+    z-index:10;
+}
