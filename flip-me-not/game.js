@@ -1,8 +1,12 @@
 const canvas =
-document.getElementById("game");
+document.getElementById(
+"game"
+);
 
 const ctx =
-canvas.getContext("2d");
+canvas.getContext(
+"2d"
+);
 
 function resize(){
 
@@ -20,124 +24,116 @@ window.addEventListener(
 resize
 );
 
+const screens = [
+
+    "settingsScreen",
+    "shopScreen",
+    "howToPlayScreen",
+    "creditsScreen",
+    "websiteScreen",
+    "wikiScreen",
+    "leaderboardScreen"
+
+];
+
+function closeAllScreens(){
+
+    screens.forEach(id=>{
+
+        document.getElementById(id)
+        .classList.add(
+        "hidden"
+        );
+
+    });
+}
+
 function startGame(){
+
+    closeAllScreens();
 
     document.getElementById(
     "startScreen"
-    ).style.display =
-    "none";
+    ).classList.add(
+    "hidden"
+    );
 }
 
 function openSettings(){
 
-    document.getElementById(
-    "settingsScreen"
-    ).style.display =
-    "flex";
-}
-
-function closeSettings(){
+    closeAllScreens();
 
     document.getElementById(
     "settingsScreen"
-    ).style.display =
-    "none";
+    ).classList.remove(
+    "hidden"
+    );
 }
 
 function openShop(){
 
-    document.getElementById(
-    "shopScreen"
-    ).style.display =
-    "flex";
-}
-
-function closeShop(){
+    closeAllScreens();
 
     document.getElementById(
     "shopScreen"
-    ).style.display =
-    "none";
+    ).classList.remove(
+    "hidden"
+    );
 }
 
 function openHowToPlay(){
 
-    document.getElementById(
-    "howToPlayScreen"
-    ).style.display =
-    "flex";
-}
-
-function closeHowToPlay(){
+    closeAllScreens();
 
     document.getElementById(
     "howToPlayScreen"
-    ).style.display =
-    "none";
+    ).classList.remove(
+    "hidden"
+    );
 }
 
 function openCredits(){
 
-    document.getElementById(
-    "creditsScreen"
-    ).style.display =
-    "flex";
-}
-
-function closeCredits(){
+    closeAllScreens();
 
     document.getElementById(
     "creditsScreen"
-    ).style.display =
-    "none";
+    ).classList.remove(
+    "hidden"
+    );
 }
 
 function openWebsite(){
 
-    document.getElementById(
-    "websiteScreen"
-    ).style.display =
-    "flex";
-}
-
-function closeWebsite(){
+    closeAllScreens();
 
     document.getElementById(
     "websiteScreen"
-    ).style.display =
-    "none";
+    ).classList.remove(
+    "hidden"
+    );
 }
 
 function openWiki(){
 
-    document.getElementById(
-    "wikiScreen"
-    ).style.display =
-    "flex";
-}
-
-function closeWiki(){
+    closeAllScreens();
 
     document.getElementById(
     "wikiScreen"
-    ).style.display =
-    "none";
+    ).classList.remove(
+    "hidden"
+    );
 }
 
 function openLeaderboard(){
 
-    document.getElementById(
-    "leaderboardScreen"
-    ).style.display =
-    "flex";
-}
-
-function closeLeaderboard(){
+    closeAllScreens();
 
     document.getElementById(
     "leaderboardScreen"
-    ).style.display =
-    "none";
+    ).classList.remove(
+    "hidden"
+    );
 }
 
 function openAccount(){
@@ -149,8 +145,34 @@ function openAccount(){
 
 function toggleMusic(){
 
+    const button =
+    document.getElementById(
+    "musicToggle"
+    );
+
+    button.innerText =
+    button.innerText.includes(
+    "ON"
+    )
+    ?
+    "Music: OFF"
+    :
+    "Music: ON";
 }
 
 function toggleSounds(){
 
+    const button =
+    document.getElementById(
+    "soundToggle"
+    );
+
+    button.innerText =
+    button.innerText.includes(
+    "ON"
+    )
+    ?
+    "Sound: OFF"
+    :
+    "Sound: ON";
 }
