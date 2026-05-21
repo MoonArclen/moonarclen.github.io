@@ -5,7 +5,10 @@
     -webkit-tap-highlight-color:transparent;
 }
 
+html,
 body{
+    width:100%;
+    height:100%;
     overflow:hidden;
     background:#050816;
     font-family:Arial,sans-serif;
@@ -17,19 +20,32 @@ canvas{
 }
 
 .hidden{
-    display:none;
+    display:none !important;
 }
 
 .screen{
     position:fixed;
     inset:0;
+
     display:flex;
+
     justify-content:center;
     align-items:center;
+
+    padding:20px;
+
+    background:
+    rgba(0,0,0,.45);
+
+    z-index:100;
 }
 
 .panel{
     width:min(92vw,430px);
+
+    max-height:90vh;
+
+    overflow:auto;
 
     background:#0b1222;
 
@@ -40,55 +56,79 @@ canvas{
     color:white;
 
     position:relative;
+
+    border:
+    1px solid
+    rgba(255,255,255,.06);
 }
 
 #title{
-    font-size:4rem;
+    font-size:
+    clamp(3rem,10vw,5rem);
+
     line-height:.9;
+
     font-weight:900;
 }
 
 #subtitle{
-    margin-top:16px;
-    color:#9aa8d6;
+    margin-top:18px;
+
+    color:#98a5d5;
+
     line-height:1.7;
 }
 
 #menuStats{
     display:flex;
+
     gap:12px;
+
     margin-top:24px;
 }
 
 .menuStat{
     flex:1;
+
     background:#151d34;
+
     border-radius:18px;
+
     padding:14px;
+
     text-align:center;
 }
 
 .menuStat span{
     display:block;
-    color:#95a3d3;
+
+    color:#94a1cf;
 }
 
 .menuStat strong{
     display:block;
+
     margin-top:6px;
-    font-size:1.4rem;
+
+    font-size:1.45rem;
 }
 
 .menuBtn,
 .toggleBtn{
     width:100%;
+
     padding:16px;
+
     margin-top:12px;
+
     border:none;
+
     border-radius:18px;
-    background:#5f74da;
+
     color:white;
+
     font-size:1rem;
+
     cursor:pointer;
 }
 
@@ -97,19 +137,24 @@ canvas{
 }
 
 .shopBtn{
-    background:#7558d8;
+    background:#7b5fda;
 }
 
 .settingsBtn{
-    background:#485d9e;
+    background:#4e5f9b;
 }
 
 .leaderBtn{
-    background:#596bc7;
+    background:#596bc8;
+}
+
+.toggleBtn{
+    background:#151d34;
 }
 
 .closeBtn{
     position:absolute;
+
     top:16px;
     right:16px;
 
@@ -129,8 +174,11 @@ canvas{
 
 #socials{
     display:flex;
+
     justify-content:center;
+
     gap:10px;
+
     margin-top:24px;
 }
 
@@ -143,6 +191,7 @@ canvas{
     background:#151d34;
 
     display:flex;
+
     justify-content:center;
     align-items:center;
 
@@ -153,8 +202,10 @@ canvas{
 
 #copyright{
     text-align:center;
-    margin-top:12px;
-    color:#8ea0d8;
+
+    margin-top:14px;
+
+    color:#93a1d2;
 }
 
 .shopGrid{
@@ -180,15 +231,14 @@ canvas{
 
 .shopPreview{
     width:100%;
+
     height:90px;
 
     border-radius:18px;
 
-    background:#1a2442;
+    overflow:hidden;
 
     position:relative;
-
-    overflow:hidden;
 }
 
 .cosmicPreview{
@@ -210,13 +260,11 @@ canvas{
     background:
     radial-gradient(
     circle,
-    rgba(255,255,255,.4) 1px,
+    rgba(255,255,255,.35) 1px,
     transparent 1px
     );
 
     background-size:22px 22px;
-
-    opacity:.45;
 }
 
 .trailPreview{
@@ -277,41 +325,52 @@ canvas{
 
 .shopName{
     margin-top:12px;
+
     font-weight:bold;
 }
 
 .shopPrice{
     margin-top:8px;
-    color:#9aa8d6;
+
+    color:#98a5d5;
 }
 
 .infoText{
     margin-top:20px;
+
     line-height:1.8;
-    color:#c4cdec;
+
+    color:#c7d0ef;
 }
 
 #hud{
     position:fixed;
+
     top:16px;
     left:16px;
+
     z-index:10;
+
     color:white;
 }
 
 #logo{
-    font-size:2rem;
+    font-size:
+    clamp(1.9rem,4vw,2.8rem);
+
     font-weight:900;
 }
 
 #distance,
 #coins{
     margin-top:6px;
-    color:#9aa8d6;
+
+    color:#9aa8d8;
 }
 
 #pauseBtn{
     position:fixed;
+
     top:16px;
     right:16px;
 
@@ -329,4 +388,14 @@ canvas{
     cursor:pointer;
 
     z-index:10;
+}
+
+.leaderboardItem{
+    background:#151d34;
+
+    padding:16px;
+
+    border-radius:18px;
+
+    margin-top:12px;
 }
