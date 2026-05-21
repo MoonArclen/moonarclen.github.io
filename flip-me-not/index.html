@@ -1,416 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,
-initial-scale=1.0,
-maximum-scale=1.0,
-user-scalable=no">
-
-<title>
-Flip Me Not
-</title>
-
-<link rel="stylesheet"
-href="https://ma.work.gd/flip-me-not/style.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flip Me Not</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
 </head>
 <body>
 
 <canvas id="game"></canvas>
 
 <div id="hud">
-
-    <div id="logo">
-        Flip Me Not
-    </div>
-
-    <div id="distance">
-        Distance: 0
-    </div>
-
-    <div id="coins">
-        Coins: 0
-    </div>
-
+    <div id="logo">Flip Me Not</div>
+    <div id="distance">Distance: 0</div>
+    <div id="coins">Coins: 0</div>
 </div>
 
-<button id="pauseBtn">
-    <i class="fa-solid fa-pause"></i>
-</button>
+<button id="pauseBtn"><i class="fa-solid fa-pause"></i></button>
 
-<div class="screen"
-id="startScreen">
-
+<!-- Start Screen -->
+<div class="screen" id="startScreen">
     <div class="panel">
-
-        <div id="title">
-            Flip<br>Me Not
-        </div>
-
-        <div id="subtitle">
-            Flip gravity.<br>
-            Dodge spikes.<br>
-            Survive forever.
-        </div>
-
+        <div id="title">Flip<br>Me Not</div>
+        <div id="subtitle">Flip gravity.<br>Dodge spikes.<br>Survive forever.</div>
         <div id="menuStats">
-
-            <div class="menuStat">
-
-                <span>
-                    Coins
-                </span>
-
-                <strong id="menuCoins">
-                    0
-                </strong>
-
-            </div>
-
-            <div class="menuStat">
-
-                <span>
-                    High Score
-                </span>
-
-                <strong id="menuHigh">
-                    0
-                </strong>
-
-            </div>
-
+            <div class="menuStat"><span>Coins</span><strong id="menuCoins">0</strong></div>
+            <div class="menuStat"><span>High Score</span><strong id="menuHigh">0</strong></div>
         </div>
-
-        <button class="menuBtn playBtn"
-        onclick="startGame()">
-            Play
-        </button>
-
-        <button class="menuBtn shopBtn"
-        onclick="openShop()">
-            Shop
-        </button>
-
-        <button class="menuBtn settingsBtn"
-        onclick="openSettings()">
-            Settings
-        </button>
-
-        <button class="menuBtn leaderBtn"
-        onclick="openLeaderboard()">
-            Leaderboard
-        </button>
+        <button class="menuBtn playBtn" onclick="startGame()">Play</button>
+        <button class="menuBtn shopBtn" onclick="openScreen('shopScreen')">Shop</button>
+        <button class="menuBtn settingsBtn" onclick="openScreen('settingsScreen')">Settings</button>
+        <button class="menuBtn leaderBtn" onclick="openScreen('leaderboardScreen')">Leaderboard</button>
 
         <div id="socials">
-
-            <a href="https://youtube.com/@moonarclen"
-            target="_blank">
-                <i class="fa-brands fa-youtube"></i>
-            </a>
-
-            <a href="https://github.com/moonarclen"
-            target="_blank">
-                <i class="fa-brands fa-github"></i>
-            </a>
-
-            <a href="https://twitch.tv/moonarclen"
-            target="_blank">
-                <i class="fa-brands fa-twitch"></i>
-            </a>
-
-            <a href="https://dsc.gg/moonarclen"
-            target="_blank">
-                <i class="fa-brands fa-discord"></i>
-            </a>
-
+            <a href="https://youtube.com/@moonarclen" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://github.com/moonarclen" target="_blank"><i class="fa-brands fa-github"></i></a>
+            <a href="https://twitch.tv/moonarclen" target="_blank"><i class="fa-brands fa-twitch"></i></a>
+            <a href="https://dsc.gg/moonarclen" target="_blank"><i class="fa-brands fa-discord"></i></a>
         </div>
+        <div id="copyright">Music & Art © Moon Arclen</div>
+    </div>
+</div>
 
-        <div id="copyright">
+<!-- Settings Screen -->
+<div class="screen hidden" id="settingsScreen">
+    <div class="panel">
+        <button class="closeBtn" onclick="closeAllScreens()">✕</button>
+        <h1>Settings</h1>
+        <button class="toggleBtn" onclick="openAccount()">Account</button>
+        <button class="toggleBtn" id="soundToggle" onclick="toggleSounds()">Sound: ON</button>
+        <button class="toggleBtn" id="musicToggle" onclick="toggleMusic()">Music: ON</button>
+        <button class="toggleBtn" onclick="openScreen('howToPlayScreen')">How To Play</button>
+        <button class="toggleBtn" onclick="openScreen('websiteScreen')">Website</button>
+        <button class="toggleBtn" onclick="openScreen('wikiScreen')">Wiki</button>
+        <button class="toggleBtn" onclick="openScreen('creditsScreen')">Credits</button>
+    </div>
+</div>
+
+<!-- Shop Screen -->
+<div class="screen hidden" id="shopScreen">
+    <div class="panel">
+        <button class="closeBtn" onclick="closeAllScreens()">✕</button>
+        <h1>Shop</h1>
+        <div class="shopGrid">
+            <div class="shopItem">
+                <div class="shopPreview cosmicPreview"></div>
+                <div class="shopName">Cosmic Theme</div>
+                <div class="shopPrice">Coming Soon</div>
+            </div>
+            <div class="shopItem">
+                <div class="shopPreview trailPreview"></div>
+                <div class="shopName">Star Trail</div>
+                <div class="shopPrice">Coming Soon</div>
+            </div>
+            <div class="shopItem">
+                <div class="shopPreview meteorPreview"></div>
+                <div class="shopName">Meteor Cube</div>
+                <div class="shopPrice">Coming Soon</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How To Play Screen -->
+<div class="screen hidden" id="howToPlayScreen">
+    <div class="panel">
+        <button class="closeBtn" onclick="closeAllScreens()">✕</button>
+        <h1>How To Play</h1>
+        <div class="infoText">
+            Tap the screen or press SPACE to flip gravity.<br><br>
+            Avoid spikes and survive as long as possible.<br><br>
+            Every score gives 1 coin.
+        </div>
+    </div>
+</div>
+
+<!-- Credits Screen -->
+<div class="screen hidden" id="creditsScreen">
+    <div class="panel">
+        <button class="closeBtn" onclick="closeAllScreens()">✕</button>
+        <h1>Credits</h1>
+        <div class="infoText">
+            Created By Moon Arclen<br><br>
+            HTML CSS JavaScript<br><br>
+            Cosmic Visual Style<br><br>
             Music & Art © Moon Arclen
         </div>
-
     </div>
-
 </div>
 
-<div class="screen hidden"
-id="settingsScreen">
-
+<!-- Website Screen -->
+<div class="screen hidden" id="websiteScreen">
     <div class="panel">
-
-        <button class="closeBtn"
-        onclick="closeAllScreens()">
-            ✕
-        </button>
-
-        <h1>
-            Settings
-        </h1>
-
-        <button class="toggleBtn"
-        onclick="openAccount()">
-            Account
-        </button>
-
-        <button class="toggleBtn"
-        id="soundToggle"
-        onclick="toggleSounds()">
-            Sound: ON
-        </button>
-
-        <button class="toggleBtn"
-        id="musicToggle"
-        onclick="toggleMusic()">
-            Music: ON
-        </button>
-
-        <button class="toggleBtn"
-        onclick="openHowToPlay()">
-            How To Play
-        </button>
-
-        <button class="toggleBtn"
-        onclick="openWebsite()">
-            Website
-        </button>
-
-        <button class="toggleBtn"
-        onclick="openWiki()">
-            Wiki
-        </button>
-
-        <button class="toggleBtn"
-        onclick="openCredits()">
-            Credits
-        </button>
-
+        <button class="closeBtn" onclick="closeAllScreens()">✕</button>
+        <h1>Website</h1>
+        <button class="menuBtn" onclick="window.open('https://ma.work.gd')">Open Website</button>
     </div>
-
 </div>
 
-<div class="screen hidden"
-id="shopScreen">
-
+<!-- Wiki Screen -->
+<div class="screen hidden" id="wikiScreen">
     <div class="panel">
-
-        <button class="closeBtn"
-        onclick="closeAllScreens()">
-            ✕
-        </button>
-
-        <h1>
-            Shop
-        </h1>
-
-        <div class="shopGrid">
-
-            <div class="shopItem">
-
-                <div class="shopPreview cosmicPreview"></div>
-
-                <div class="shopName">
-                    Cosmic Theme
-                </div>
-
-                <div class="shopPrice">
-                    Coming Soon
-                </div>
-
-            </div>
-
-            <div class="shopItem">
-
-                <div class="shopPreview trailPreview"></div>
-
-                <div class="shopName">
-                    Star Trail
-                </div>
-
-                <div class="shopPrice">
-                    Coming Soon
-                </div>
-
-            </div>
-
-            <div class="shopItem">
-
-                <div class="shopPreview meteorPreview"></div>
-
-                <div class="shopName">
-                    Meteor Cube
-                </div>
-
-                <div class="shopPrice">
-                    Coming Soon
-                </div>
-
-            </div>
-
-        </div>
-
+        <button class="closeBtn" onclick="closeAllScreens()">✕</button>
+        <h1>Wiki</h1>
+        <button class="menuBtn" onclick="window.open('https://ma.work.gd/wiki')">Open Wiki</button>
     </div>
-
 </div>
 
-<div class="screen hidden"
-id="howToPlayScreen">
-
+<!-- Leaderboard Screen -->
+<div class="screen hidden" id="leaderboardScreen">
     <div class="panel">
-
-        <button class="closeBtn"
-        onclick="closeAllScreens()">
-            ✕
-        </button>
-
-        <h1>
-            How To Play
-        </h1>
-
-        <div class="infoText">
-
-            Tap the screen or press SPACE
-            to flip gravity.
-
-            <br><br>
-
-            Avoid spikes and survive
-            as long as possible.
-
-            <br><br>
-
-            Every score gives 1 coin.
-
-        </div>
-
-    </div>
-
-</div>
-
-<div class="screen hidden"
-id="creditsScreen">
-
-    <div class="panel">
-
-        <button class="closeBtn"
-        onclick="closeAllScreens()">
-            ✕
-        </button>
-
-        <h1>
-            Credits
-        </h1>
-
-        <div class="infoText">
-
-            Created By Moon Arclen
-
-            <br><br>
-
-            HTML CSS JavaScript
-
-            <br><br>
-
-            Cosmic Visual Style
-
-            <br><br>
-
-            Music & Art
-            © Moon Arclen
-
-        </div>
-
-    </div>
-
-</div>
-
-<div class="screen hidden"
-id="websiteScreen">
-
-    <div class="panel">
-
-        <button class="closeBtn"
-        onclick="closeAllScreens()">
-            ✕
-        </button>
-
-        <h1>
-            Website
-        </h1>
-
-        <button class="menuBtn"
-        onclick="window.open('https://ma.work.gd')">
-            Open Website
-        </button>
-
-    </div>
-
-</div>
-
-<div class="screen hidden"
-id="wikiScreen">
-
-    <div class="panel">
-
-        <button class="closeBtn"
-        onclick="closeAllScreens()">
-            ✕
-        </button>
-
-        <h1>
-            Wiki
-        </h1>
-
-        <button class="menuBtn"
-        onclick="window.open('https://ma.work.gd/wiki')">
-            Open Wiki
-        </button>
-
-    </div>
-
-</div>
-
-<div class="screen hidden"
-id="leaderboardScreen">
-
-    <div class="panel">
-
-        <button class="closeBtn"
-        onclick="closeAllScreens()">
-            ✕
-        </button>
-
-        <h1>
-            Leaderboard
-        </h1>
-
+        <button class="closeBtn" onclick="closeAllScreens()">✕</button>
+        <h1>Leaderboard</h1>
         <div id="leaderboardList">
-
-            <div class="leaderboardItem">
-                Player#1 — 24
-            </div>
-
-            <div class="leaderboardItem">
-                Player#2 — 19
-            </div>
-
-            <div class="leaderboardItem">
-                Player#3 — 11
-            </div>
-
+            <div class="leaderboardItem">Player#1 — 24</div>
+            <div class="leaderboardItem">Player#2 — 19</div>
+            <div class="leaderboardItem">Player#3 — 11</div>
         </div>
-
     </div>
-
 </div>
 
 <script src="https://ma.work.gd/flip-me-not/game.js"></script>
-
 </body>
 </html>
