@@ -53,12 +53,21 @@ canvas{
 
 .panel{
     width:min(92vw,430px);
+    max-height:90vh;
+    overflow:auto;
+
     background:rgba(10,14,28,.96);
+
     border:1px solid rgba(255,255,255,.06);
+
     border-radius:30px;
+
     padding:28px;
+
     box-shadow:0 20px 70px rgba(0,0,0,.5);
+
     color:white;
+
     position:relative;
 }
 
@@ -147,6 +156,10 @@ canvas{
     background:#4f5f96;
 }
 
+.leaderBtn{
+    background:#596bc7;
+}
+
 .toggleBtn{
     width:100%;
     padding:14px;
@@ -165,6 +178,17 @@ canvas{
 .settingTitle{
     margin-bottom:10px;
     color:#c5d0f2;
+}
+
+.settingInput{
+    width:100%;
+    padding:14px;
+    border:none;
+    outline:none;
+    border-radius:16px;
+    background:rgba(255,255,255,.06);
+    color:white;
+    font-size:1rem;
 }
 
 #socialWrap{
@@ -236,11 +260,10 @@ canvas{
     z-index:20;
 }
 
-#creditsScreen,
-#shopScreen,
+#settingsScreen,
+#leaderboardScreen,
 #pauseMenu,
-#gameOver,
-#settingsScreen{
+#gameOver{
     display:none;
     background:rgba(0,0,0,.68);
 }
@@ -258,51 +281,14 @@ canvas{
     cursor:pointer;
 }
 
-#creditsContent{
-    max-height:60vh;
-    overflow:auto;
-}
-
-.creditRole{
-    color:#8ea1df;
-    margin-top:20px;
-    font-size:1rem;
-}
-
-.creditName{
-    font-size:1.4rem;
-    margin-top:6px;
-}
-
-#shopGrid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
-    margin-top:20px;
-}
-
-.shopItem{
-    background:rgba(255,255,255,.05);
-    border-radius:18px;
-    padding:20px;
-    text-align:center;
-}
-
-.shopIcon{
-    width:70px;
-    height:70px;
-    margin:auto;
-    border-radius:18px;
-    background:rgba(255,255,255,.06);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:1.8rem;
-}
-
-.shopName{
+.leaderboardItem{
     margin-top:12px;
-    color:#c4cdec;
+    padding:14px;
+    border-radius:16px;
+    background:rgba(255,255,255,.05);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .finalText{
@@ -310,42 +296,10 @@ canvas{
     color:#b8c3e6;
 }
 
-#shareWrap{
-    margin-top:22px;
-}
-
-#shareTitle{
-    color:#aab5d9;
-    margin-bottom:12px;
-    font-size:.95rem;
-    text-align:center;
-}
-
-#shareButtons{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-}
-
-.shareBtn{
-    width:54px;
-    height:54px;
-    border:none;
-    border-radius:16px;
-    background:rgba(255,255,255,.06);
-    color:white;
-    font-size:1rem;
-    cursor:pointer;
-}
-
 @media(max-width:650px){
 
     #menuStats{
         flex-direction:column;
-    }
-
-    #shopGrid{
-        grid-template-columns:1fr;
     }
 
     .panel{
@@ -411,16 +365,12 @@ canvas{
             Play
         </button>
 
-        <button class="menuBtn shopBtn" onclick="openShop()">
-            Shop
-        </button>
-
-        <button class="menuBtn creditBtn" onclick="openCredits()">
-            Credits
-        </button>
-
         <button class="menuBtn settingsBtn" onclick="openSettings()">
             Settings
+        </button>
+
+        <button class="menuBtn leaderBtn" onclick="openLeaderboard()">
+            Leaderboard
         </button>
 
         <div id="socialWrap">
@@ -470,17 +420,38 @@ canvas{
         <div class="settingRow">
 
             <div class="settingTitle">
+                Display Name
+            </div>
+
+            <input
+            id="displayNameInput"
+            class="settingInput"
+            maxlength="18"
+            placeholder="Player">
+
+            <button
+            class="menuBtn settingsBtn"
+            onclick="saveDisplayName()">
+                Save Display Name
+            </button>
+
+        </div>
+
+        <div class="settingRow">
+
+            <div class="settingTitle">
                 Account
             </div>
 
-            <button class="toggleBtn" onclick="loginGithub()">
-                Connect GitHub
+            <button class="toggleBtn"
+            onclick="oauthComingSoon()">
+                GitHub OAuth
             </button>
 
             <button class="toggleBtn"
             style="margin-top:10px"
-            onclick="loginItch()">
-                Connect Itch.io
+            onclick="oauthComingSoon()">
+                Itch.io OAuth
             </button>
 
             <div id="accountStatus"
@@ -489,7 +460,7 @@ canvas{
             color:#9fb0e8;
             font-size:.95rem;
             ">
-                Not Connected
+                OAuth Coming Soon
             </div>
 
         </div>
@@ -511,7 +482,7 @@ canvas{
         <div class="settingRow">
 
             <div class="settingTitle">
-                Sound Effects
+                Sounds
             </div>
 
             <button class="toggleBtn"
@@ -521,6 +492,86 @@ canvas{
             </button>
 
         </div>
+
+    </div>
+
+</div>
+
+<div class="screen" id="leaderboardScreen">
+
+    <div class="panel">
+
+        <button class="closeBtn"
+        onclick="closeLeaderboard()">
+            ✕
+        </button>
+
+        <h1>
+            Leaderboard
+        </h1>
+
+        <div id="leaderboardList">
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="screen" id="pauseMenu">
+
+    <div class="panel">
+
+        <h1>
+            Paused
+        </h1>
+
+        <button class="menuBtn playBtn"
+        onclick="resumeGame()">
+            Resume
+        </button>
+
+        <button class="menuBtn creditBtn"
+        onclick="location.reload()">
+            Quit
+        </button>
+
+    </div>
+
+</div>
+
+<div class="screen" id="gameOver">
+
+    <div class="panel">
+
+        <h1>
+            Game Over
+        </h1>
+
+        <div class="finalText"
+        id="finalDistance">
+            Distance: 0
+        </div>
+
+        <div class="finalText"
+        id="finalCoins">
+            Coins Earned: 0
+        </div>
+
+        <div class="finalText"
+        id="finalHigh">
+            High Score: 0
+        </div>
+
+        <button class="menuBtn playBtn"
+        onclick="restartGame()">
+            Play Again
+        </button>
+
+        <button class="menuBtn creditBtn"
+        onclick="location.reload()">
+            Main Menu
+        </button>
 
     </div>
 
@@ -550,15 +601,50 @@ window.addEventListener(
 resize
 );
 
+const FLOOR = 34;
+const CEILING = 34;
+
+let gravity = .85;
+let gravityDirection = 1;
+
+let gameRunning = false;
+let paused = false;
+
+let score = 0;
+let coins = 0;
+let speed = 7;
+
+let spikes = [];
+let spikeLoop;
+
 let musicEnabled = true;
 let soundEnabled = true;
 
-let accountData =
-JSON.parse(
+let totalCoins =
+parseInt(
 localStorage.getItem(
-"flipAccount"
+"flipCoins"
+) || 0
+);
+
+let highScore =
+parseInt(
+localStorage.getItem(
+"flipHigh"
+) || 0
+);
+
+let displayName =
+localStorage.getItem(
+"flipDisplayName"
 )
-) || null;
+||
+"Player";
+
+document.getElementById(
+"displayNameInput"
+).value =
+displayName;
 
 const music =
 new Audio(
@@ -575,29 +661,6 @@ new Audio(
 
 dieSound.volume = .8;
 
-let totalCoins =
-parseInt(
-localStorage.getItem(
-"flipCoins"
-) || 0
-);
-
-let highScore =
-parseInt(
-localStorage.getItem(
-"flipHigh"
-) || 0
-);
-
-if(accountData){
-
-    totalCoins =
-    accountData.coins || 0;
-
-    highScore =
-    accountData.highScore || 0;
-}
-
 document.getElementById(
 "menuCoins"
 ).innerText =
@@ -607,6 +670,452 @@ document.getElementById(
 "menuHigh"
 ).innerText =
 highScore;
+
+const player = {
+
+    x:160,
+    y:250,
+
+    size:
+    Math.min(
+    innerWidth * .09,
+    56
+    ),
+
+    velY:0,
+    rotation:0
+};
+
+function createSpike(){
+
+    const top =
+    Math.random() > .5;
+
+    spikes.push({
+
+        x:
+        canvas.width + 60,
+
+        width:
+        player.size * .9,
+
+        height:
+        player.size * .9,
+
+        top,
+
+        scored:false
+    });
+}
+
+function drawBackground(){
+
+    const gradient =
+    ctx.createLinearGradient(
+    0,
+    0,
+    0,
+    canvas.height
+    );
+
+    gradient.addColorStop(
+    0,
+    "#091022"
+    );
+
+    gradient.addColorStop(
+    1,
+    "#050816"
+    );
+
+    ctx.fillStyle =
+    gradient;
+
+    ctx.fillRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+    );
+}
+
+function drawWalls(){
+
+    ctx.fillStyle =
+    "#1c2745";
+
+    ctx.fillRect(
+    0,
+    0,
+    canvas.width,
+    CEILING
+    );
+
+    ctx.fillStyle =
+    "#17203a";
+
+    ctx.fillRect(
+    0,
+    canvas.height -
+    FLOOR,
+    canvas.width,
+    FLOOR
+    );
+}
+
+function drawPlayer(){
+
+    ctx.save();
+
+    player.rotation +=
+    player.velY * .03;
+
+    ctx.translate(
+    player.x +
+    player.size/2,
+
+    player.y +
+    player.size/2
+    );
+
+    ctx.rotate(
+    player.rotation
+    );
+
+    ctx.fillStyle =
+    "#7488e8";
+
+    ctx.beginPath();
+
+    ctx.roundRect(
+    -player.size/2,
+    -player.size/2,
+    player.size,
+    player.size,
+    14
+    );
+
+    ctx.fill();
+
+    ctx.restore();
+}
+
+function drawSpikes(){
+
+    spikes.forEach(spike=>{
+
+        const y =
+        spike.top
+        ?
+        CEILING
+        :
+        canvas.height -
+        FLOOR -
+        spike.height;
+
+        ctx.fillStyle =
+        "#f0f4ff";
+
+        ctx.beginPath();
+
+        if(spike.top){
+
+            ctx.moveTo(
+            spike.x,
+            y
+            );
+
+            ctx.lineTo(
+            spike.x +
+            spike.width/2,
+            y +
+            spike.height
+            );
+
+            ctx.lineTo(
+            spike.x +
+            spike.width,
+            y
+            );
+
+        }else{
+
+            ctx.moveTo(
+            spike.x,
+            y +
+            spike.height
+            );
+
+            ctx.lineTo(
+            spike.x +
+            spike.width/2,
+            y
+            );
+
+            ctx.lineTo(
+            spike.x +
+            spike.width,
+            y +
+            spike.height
+            );
+        }
+
+        ctx.closePath();
+        ctx.fill();
+    });
+}
+
+function updatePlayer(){
+
+    player.velY +=
+    gravity *
+    gravityDirection;
+
+    player.y +=
+    player.velY;
+
+    if(player.y < CEILING){
+
+        player.y =
+        CEILING;
+
+        player.velY = 0;
+    }
+
+    if(
+    player.y +
+    player.size
+    >
+    canvas.height -
+    FLOOR
+    ){
+
+        player.y =
+        canvas.height -
+        FLOOR -
+        player.size;
+
+        player.velY = 0;
+    }
+}
+
+function updateSpikes(){
+
+    spikes.forEach(spike=>{
+
+        spike.x -= speed;
+
+        const y =
+        spike.top
+        ?
+        CEILING
+        :
+        canvas.height -
+        FLOOR -
+        spike.height;
+
+        if(
+
+        player.x <
+        spike.x +
+        spike.width
+
+        &&
+
+        player.x +
+        player.size >
+        spike.x
+
+        &&
+
+        player.y <
+        y +
+        spike.height
+
+        &&
+
+        player.y +
+        player.size >
+        y
+
+        ){
+
+            endGame();
+        }
+
+        if(
+
+        !spike.scored
+
+        &&
+
+        spike.x +
+        spike.width <
+        player.x
+
+        ){
+
+            spike.scored =
+            true;
+
+            score++;
+            coins++;
+
+            document.getElementById(
+            "distance"
+            ).innerText =
+            "Distance: " +
+            score;
+
+            document.getElementById(
+            "coins"
+            ).innerText =
+            "Coins: " +
+            (totalCoins + coins);
+        }
+    });
+
+    spikes =
+    spikes.filter(
+    spike =>
+    spike.x > -100
+    );
+}
+
+function gameLoop(){
+
+    drawBackground();
+
+    if(
+    gameRunning &&
+    !paused
+    ){
+
+        updatePlayer();
+        updateSpikes();
+    }
+
+    drawWalls();
+    drawSpikes();
+    drawPlayer();
+
+    requestAnimationFrame(
+    gameLoop
+    );
+}
+
+gameLoop();
+
+function flipGravity(){
+
+    if(!gameRunning)
+    return;
+
+    if(paused)
+    return;
+
+    gravityDirection *= -1;
+
+    player.velY =
+    gravityDirection * 9;
+}
+
+function startGame(){
+
+    document.getElementById(
+    "startScreen"
+    ).style.display =
+    "none";
+
+    gameRunning = true;
+
+    if(musicEnabled){
+
+        music.play()
+        .catch(()=>{});
+    }
+
+    spikeLoop =
+    setInterval(()=>{
+
+        if(
+        gameRunning &&
+        !paused
+        ){
+
+            createSpike();
+        }
+
+    },1200);
+}
+
+function endGame(){
+
+    gameRunning = false;
+
+    clearInterval(
+    spikeLoop
+    );
+
+    music.pause();
+
+    music.currentTime = 0;
+
+    if(soundEnabled){
+
+        dieSound.currentTime = 0;
+
+        dieSound.play()
+        .catch(()=>{});
+    }
+
+    totalCoins += coins;
+
+    localStorage.setItem(
+    "flipCoins",
+    totalCoins
+    );
+
+    if(score > highScore){
+
+        highScore = score;
+
+        localStorage.setItem(
+        "flipHigh",
+        highScore
+        );
+    }
+
+    saveLeaderboard();
+
+    document.getElementById(
+    "finalDistance"
+    ).innerText =
+    "Distance: " +
+    score;
+
+    document.getElementById(
+    "finalCoins"
+    ).innerText =
+    "Coins Earned: " +
+    coins;
+
+    document.getElementById(
+    "finalHigh"
+    ).innerText =
+    "High Score: " +
+    highScore;
+
+    document.getElementById(
+    "gameOver"
+    ).style.display =
+    "flex";
+}
+
+function restartGame(){
+
+    location.reload();
+}
 
 function openSettings(){
 
@@ -624,6 +1133,50 @@ function closeSettings(){
     "none";
 }
 
+function openLeaderboard(){
+
+    loadLeaderboard();
+
+    document.getElementById(
+    "leaderboardScreen"
+    ).style.display =
+    "flex";
+}
+
+function closeLeaderboard(){
+
+    document.getElementById(
+    "leaderboardScreen"
+    ).style.display =
+    "none";
+}
+
+function saveDisplayName(){
+
+    displayName =
+    document.getElementById(
+    "displayNameInput"
+    ).value
+    ||
+    "Player";
+
+    localStorage.setItem(
+    "flipDisplayName",
+    displayName
+    );
+
+    alert(
+    "Display Name Saved"
+    );
+}
+
+function oauthComingSoon(){
+
+    alert(
+    "OAuth Login Coming Soon"
+    );
+}
+
 function toggleMusic(){
 
     musicEnabled =
@@ -634,17 +1187,20 @@ function toggleMusic(){
     ).innerText =
     "Music: " +
     (
-        musicEnabled
-        ?
-        "ON"
-        :
-        "OFF"
+    musicEnabled
+    ?
+    "ON"
+    :
+    "OFF"
     );
 
     if(musicEnabled){
 
-        music.play()
-        .catch(()=>{});
+        if(gameRunning){
+
+            music.play()
+            .catch(()=>{});
+        }
 
     }else{
 
@@ -662,99 +1218,160 @@ function toggleSounds(){
     ).innerText =
     "Sounds: " +
     (
-        soundEnabled
-        ?
-        "ON"
-        :
-        "OFF"
+    soundEnabled
+    ?
+    "ON"
+    :
+    "OFF"
     );
 }
 
-function updateAccountUI(){
+function saveLeaderboard(){
 
-    if(accountData){
-
-        document.getElementById(
-        "accountStatus"
-        ).innerText =
-        "Connected: " +
-        accountData.type +
-        " @" +
-        accountData.username;
-
-    }else{
-
-        document.getElementById(
-        "accountStatus"
-        ).innerText =
-        "Not Connected";
-    }
-}
-
-function loginGithub(){
-
-    const username =
-    prompt(
-    "Enter GitHub Username"
+    let board =
+    JSON.parse(
+    localStorage.getItem(
+    "flipLeaderboard"
+    ) || "[]"
     );
 
-    if(!username)
-    return;
+    board.push({
 
-    accountData = {
+        name:
+        displayName,
 
-        type:"GitHub",
-        username
-    };
+        score:
+        score
+    });
 
-    saveAccount();
-}
-
-function loginItch(){
-
-    const username =
-    prompt(
-    "Enter Itch.io Username"
+    board.sort(
+    (a,b)=>
+    b.score -
+    a.score
     );
 
-    if(!username)
-    return;
-
-    accountData = {
-
-        type:"Itch.io",
-        username
-    };
-
-    saveAccount();
-}
-
-function saveAccount(){
-
-    const saveData = {
-
-        type:
-        accountData.type,
-
-        username:
-        accountData.username,
-
-        coins:
-        totalCoins,
-
-        highScore:
-        highScore
-    };
+    board =
+    board.slice(0,10);
 
     localStorage.setItem(
-    "flipAccount",
-    JSON.stringify(saveData)
+    "flipLeaderboard",
+    JSON.stringify(board)
     );
-
-    updateAccountUI();
 }
 
-updateAccountUI();
+function loadLeaderboard(){
+
+    const board =
+    JSON.parse(
+    localStorage.getItem(
+    "flipLeaderboard"
+    ) || "[]"
+    );
+
+    const list =
+    document.getElementById(
+    "leaderboardList"
+    );
+
+    list.innerHTML = "";
+
+    if(board.length === 0){
+
+        list.innerHTML =
+        "<div class='leaderboardItem'>No Scores Yet</div>";
+
+        return;
+    }
+
+    board.forEach((item,index)=>{
+
+        list.innerHTML +=
+        `
+        <div class="leaderboardItem">
+
+            <div>
+                #${index + 1}
+                ${item.name}
+            </div>
+
+            <div>
+                ${item.score}
+            </div>
+
+        </div>
+        `;
+    });
+}
+
+document.getElementById(
+"pauseBtn"
+).onclick = ()=>{
+
+    if(!gameRunning)
+    return;
+
+    paused = true;
+
+    document.getElementById(
+    "pauseMenu"
+    ).style.display =
+    "flex";
+};
+
+function resumeGame(){
+
+    paused = false;
+
+    document.getElementById(
+    "pauseMenu"
+    ).style.display =
+    "none";
+}
+
+window.addEventListener(
+"keydown",
+e=>{
+
+    if(
+    e.code ===
+    "Space"
+    ){
+
+        e.preventDefault();
+
+        flipGravity();
+    }
+});
+
+window.addEventListener(
+"pointerdown",
+e=>{
+
+    const tag =
+    e.target.tagName;
+
+    if(
+
+    tag === "BUTTON"
+
+    ||
+
+    tag === "INPUT"
+
+    ||
+
+    tag === "A"
+
+    ||
+
+    e.target.closest(
+    ".panel"
+    )
+
+    ) return;
+
+    flipGravity();
+});
 
 </script>
 </body>
